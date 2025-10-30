@@ -1,12 +1,16 @@
 {
   "baseURL": "https://opensource-demo.orangehrmlive.com/web/index.php",
-  "auth": {
-    "userName": "Admin",
-    "passWord": "admin123"
-  },
-  "defaults": {
-    "firstName": "Saja",
-    "middleName": "Yaser",
-    "lastName": "Ayyad"
-  }
+  "userName": "Admin",
+  "passWord": "admin123",
+
+  "firstName": "Saja",
+  "middleName": "Yaser",
+  "lastName": "Ayyad",
+
+  "fromDate": "2025-01-01",
+  "toDate": "2025-02-12",
+  "employeeName": "ahmad",
+  "status": "Rejected",
+  "leaveType": "CAN - Personal",
+  "subUnit": "Engineering"
 }

@@ -1,53 +1,87 @@
 package controller;
 
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.*;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import java.time.Duration;
 
 import POM.POMPIM;
 
 public class PIMCtrl {
 
+	private static WebDriverWait wait(WebDriver d, long sec) {
+		return new WebDriverWait(d, Duration.ofSeconds(sec));
+	}
+
+	// ---------- open PIM ----------
 	public static void openPIMpage(WebDriver driver) {
-		POMPIM.pimMenu(driver).click();
-		System.out.println("navigated to PIM page");
+		By pimLink = By.xpath("//span[normalize-space()='PIM']/ancestor::a");
+		wait(driver, 15).until(ExpectedConditions.elementToBeClickable(pimLink)).click();
+		System.out.println("[PIM] clicked pim menu");
 
+		wait(driver, 15).until(ExpectedConditions.or(//if add appear
+				ExpectedConditions.presenceOfElementLocated(By.xpath("//a[normalize-space()='Add Employee']")),
+				ExpectedConditions.presenceOfElementLocated(By.xpath("//h6[contains(.,'PIM')]"))));
+		System.out.println("[PIM] PIM loaded");
 	}
 
+	// ----------  add employee ----------
 	public static void clickAddEmployee(WebDriver driver) {
-		POMPIM.addEmployeeButton(driver).click();
-		System.out.println("opened add form");
+		By addBtn = By.xpath("//a[normalize-space()='Add Employee' or contains(@href,'addEmployee')]");
+		wait(driver, 15).until(ExpectedConditions.elementToBeClickable(addBtn)).click();
+		System.out.println("[PIM] clicked Add Employee");
+
+		wait(driver, 15).until(ExpectedConditions.visibilityOfElementLocated(By.name("firstName")));
+		wait(driver, 15).until(ExpectedConditions.visibilityOfElementLocated(By.name("lastName")));
+		System.out.println("[PIM] Add Employee form is visible");
 	}
 
+	// ---------- fill fields ----------
 	public static void fillfirstname(WebDriver driver, String firstname) {
-	    POMPIM.firstnameFaild(driver).clear();
-	    POMPIM.firstnameFaild(driver).sendKeys(firstname);
+		WebElement el = POMPIM.firstnameFaild(driver);
+		el.clear();
+		el.sendKeys(firstname);
+		System.out.println("[PIM] first name entered: " + firstname);
 	}
 
 	public static void fillmiddlename(WebDriver driver, String middlename) {
-	    POMPIM.middlenameFaild(driver).clear();
-	    POMPIM.middlenameFaild(driver).sendKeys(middlename);
+		WebElement el = POMPIM.middlenameFaild(driver);
+		el.clear();
+		el.sendKeys(middlename);
+		System.out.println("[PIM] middle name entered: " + middlename);
 	}
 
 	public static void filllastname(WebDriver driver, String lastname) {
-	    POMPIM.lastnameFaild(driver).clear();
-	    POMPIM.lastnameFaild(driver).sendKeys(lastname);
+		WebElement el = POMPIM.lastnameFaild(driver);
+		el.clear();
+		el.sendKeys(lastname);
+		System.out.println("[PIM] last name entered: " + lastname);
 	}
 
 	public static void fillemplyeeId(WebDriver driver, String employeeId) {
-	    POMPIM.emplyeeIdFaild(driver).clear();
-	    POMPIM.emplyeeIdFaild(driver).sendKeys(employeeId);
-	}
-	public static void clickSave(WebDriver driver) {
-	    POMPIM.savaButton(driver).click();
-
-		System.out.println("Save button clicked.");
+		WebElement el = POMPIM.emplyeeIdFaild(driver);
+		el.clear();
+		el.sendKeys(employeeId);
+		System.out.println("[PIM] ID entered: " + employeeId);
 	}
 
-	public static boolean isdetailspagedisplayed(WebDriver driver) {
-		try {
-			return POMPIM.personalDetalisHeader(driver).isDisplayed();
+	public static void clickSave(WebDriver driver) throws InterruptedException {
+		if (POMPIM.firstnameFaild(driver).getAttribute("value").isBlank()
+				|| POMPIM.lastnameFaild(driver).getAttribute("value").isBlank()) {
+			throw new IllegalStateException("[PIM] First/Last name are required before Save.");
+		}
 
-		} catch (Exception e) {
-			return false;
+		By saveBtn = By.xpath("//button[normalize-space()='Save']");
+		WebElement button = driver.findElement(saveBtn);
+		button.click();
+
+		Thread.sleep(6000);
+		if (driver.getCurrentUrl().contains("/pim/viewPersonalDetails")
+				|| !driver.findElements(By.xpath("//h6[contains(.,'Personal Details')]")).isEmpty()) {
+			System.out.println("[PIM] Save success.");
+		} else {
+			System.out.println("[PIM] may not  completed yet.");
 		}
 	}
+
 }

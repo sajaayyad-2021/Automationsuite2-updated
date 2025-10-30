@@ -3,8 +3,11 @@ package utilites;
 public class Config {
 
 	private String baseURL;
-	private Auth auth;
-	private Defaults defaults;
+
+	private Auth auth = new Auth();
+	private Defaults defaults = new Defaults();
+	private LeaveSearch leaveSearch = new LeaveSearch();
+
 
 	public static class Auth {
 		private String userName;
@@ -16,6 +19,11 @@ public class Config {
 
 		public String getPassWord() {
 			return passWord;
+		}
+
+		public void setAuth(String user, String pass) {
+			this.userName = user;
+			this.passWord = pass;
 		}
 	}
 
@@ -35,34 +43,88 @@ public class Config {
 		public String getLastName() {
 			return lastName;
 		}
+
+		public void setDefaults(String first, String middle, String last) {
+			this.firstName = first;
+			this.middleName = middle;
+			this.lastName = last;
+		}
 	}
+
+	public static class LeaveSearch {
+		private String fromDate;
+		private String toDate;
+		private String employeeName;
+		private String status;
+		private String leaveType;
+		private String subUnit;
+
+		public String getFromDate() {
+			return fromDate;
+		}
+
+		public String getToDate() {
+			return toDate;
+		}
+
+		public String getEmployeeName() {
+			return employeeName;
+		}
+
+		public String getStatus() {
+			return status;
+		}
+
+		public String getLeaveType() {
+			return leaveType;
+		}
+
+		public String getSubUnit() {
+			return subUnit;
+		}
+
+		public void setLeaveSearch(String fromDate, String toDate, String employeeName, String status, String leaveType,
+				String subUnit) {
+			this.fromDate = fromDate;
+			this.toDate = toDate;
+			this.employeeName = employeeName;
+			this.status = status;
+			this.leaveType = leaveType;
+			this.subUnit = subUnit;
+		}
+	}
+
 
 	public String getBaseURL() {
 		return baseURL;
-	}
-
-	public Auth getAuth() {
-		return auth;
-	}
-
-	public Defaults getDefaults() {
-		return defaults;
 	}
 
 	public void setBaseURL(String baseURL) {
 		this.baseURL = baseURL;
 	}
 
-	public void setAuth(String userName, String passWord) {
-		this.auth = new Auth();
-		this.auth.userName = userName;
-		this.auth.passWord = passWord;
+	public Auth getAuth() {
+		return auth;
 	}
 
-	public void setDefaults(String firstName, String middleName, String lastName) {
-		this.defaults = new Defaults();
-		this.defaults.firstName = firstName;
-		this.defaults.middleName = middleName;
-		this.defaults.lastName = lastName;
+	public void setAuth(String userName, String passWord) {
+		this.auth.setAuth(userName, passWord);
+	}
+
+	public Defaults getDefaults() {
+		return defaults;
+	}
+
+	public void setDefaults(String first, String middle, String last) {
+		this.defaults.setDefaults(first, middle, last);
+	}
+
+	public LeaveSearch getLeaveSearch() {
+		return leaveSearch;
+	}
+
+	public void setLeaveSearch(String fromDate, String toDate, String employeeName, String status, String leaveType,
+			String subUnit) {
+		this.leaveSearch.setLeaveSearch(fromDate, toDate, employeeName, status, leaveType, subUnit);
 	}
 }

@@ -1,47 +1,35 @@
 package Test;
 
 import org.openqa.selenium.WebDriver;
-
 import utilites.Config;
 import utilites.CustomFunction;
 import utilites.MainFunctions;
 import Driver.RegressionDriver;
 
-
 public class Main {
-	public static void main(String[] args) {
 
-        //  Load config.json
-        
-        Config cfg = CustomFunction.loadConfig("data/config.json");
-
-        //  Start browser driver
+    public static void main(String[] args) {
+        // If no external driver passed, create a default one here
         WebDriver driver = RegressionDriver.initDriver();
+        runTest(driver);
+    }
 
-        // 3) create  flow 
-        MainFunctions flow = new MainFunctions(driver);
+    public static void runTest(WebDriver driver) {
+        Config cfg = CustomFunction.loadConfig("data/config.json");
+        MainFunctions flow = new MainFunctions(driver, cfg);
 
         try {
-          // -----------1----------
             flow.performLogin(cfg);
-
-            // ----------2---------
             flow.performCreateEmployee(cfg);
-
-            // ----------3---------
-            flow.performLogout(cfg);
-
-            System.out.println("Test scenario completed successfully");
-
+            flow.performLeaveSearch(cfg);
+            flow.performLogout();
+            System.out.println("test scenario completed successfully");
         } catch (Exception e) {
-            System.out.println("Test failed with exception:");
+            System.out.println("test failed with exception:");
             e.printStackTrace();
-
         } finally {
-            // 7) Always close the browser
             driver.quit();
             System.out.println("Driver closed.");
         }
     }
 }
-
