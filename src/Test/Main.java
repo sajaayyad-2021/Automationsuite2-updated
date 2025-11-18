@@ -4,14 +4,12 @@ import org.openqa.selenium.WebDriver;
 import utilites.Config;
 import utilites.CustomFunction;
 import utilites.MainFunctions;
-import Driver.RegressionDriver;
 
 public class Main {
 
     public static void main(String[] args) {
-        // If no external driver passed, create a default one here
-        WebDriver driver = RegressionDriver.initDriver();
-        runTest(driver);
+      //  WebDriver driver = RegressionDriver.initDriver();
+     //   runTest(driver);
     }
 
     public static void runTest(WebDriver driver) {
@@ -20,9 +18,11 @@ public class Main {
 
         try {
             flow.performLogin(cfg);
-            flow.performCreateEmployee(cfg);
-            flow.performLeaveSearch(cfg);
-            flow.performLogout();
+            flow.performCreateEmployee(cfg);     // PIM: Add Employee (using Defaults)
+            flow.performLeaveSearch(cfg);        // Leave Search
+            flow.performRecruitmentAdd(cfg);     // NEW: Recruitment Add Candidate
+            MainFunctions.performLogout(driver);
+
             System.out.println("test scenario completed successfully");
         } catch (Exception e) {
             System.out.println("test failed with exception:");

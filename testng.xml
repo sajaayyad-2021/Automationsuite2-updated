@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<suite name="AutomationSuite" verbose="1">
+
+    <listeners>
+    </listeners>
+
+    <test name="Regression">
+        <classes>
+            <class name="Test.LoginTests">
+                <methods>
+                    <include name="RunTests"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+</suite>

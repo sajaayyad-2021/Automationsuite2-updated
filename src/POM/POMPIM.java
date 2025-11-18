@@ -1,8 +1,12 @@
 package POM;
 
+import java.time.Duration;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class POMPIM {
 	
@@ -61,4 +65,14 @@ public class POMPIM {
 	public static WebElement errorMessage(WebDriver driver) {
 		return driver.findElement(By.cssSelector(".oxd-input-field-error-message"));
 	}
+	  private static WebDriverWait wait(WebDriver driver) {
+	        return new WebDriverWait(driver, Duration.ofSeconds(12));
+	    }
+
+    public static WebElement pimHeader(WebDriver driver) {
+        return wait(driver).until(
+                ExpectedConditions.visibilityOfElementLocated(
+                        By.xpath("//h6[contains(normalize-space(),'Employee') or normalize-space()='PIM']"))
+        );
+    }
 }

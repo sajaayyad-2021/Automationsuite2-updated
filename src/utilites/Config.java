@@ -7,8 +7,9 @@ public class Config {
 	private Auth auth = new Auth();
 	private Defaults defaults = new Defaults();
 	private LeaveSearch leaveSearch = new LeaveSearch();
+	private Recruitment recruitment = new Recruitment();
 
-
+	/* ==================== AUTH ==================== */
 	public static class Auth {
 		private String userName;
 		private String passWord;
@@ -27,6 +28,7 @@ public class Config {
 		}
 	}
 
+	/* ==================== DEFAULTS (PIM create) ==================== */
 	public static class Defaults {
 		private String firstName;
 		private String middleName;
@@ -51,6 +53,7 @@ public class Config {
 		}
 	}
 
+	/* ==================== LEAVE SEARCH ==================== */
 	public static class LeaveSearch {
 		private String fromDate;
 		private String toDate;
@@ -94,7 +97,82 @@ public class Config {
 		}
 	}
 
+	/* ==================== RECRUITMENT (New) ==================== */
+	public static class Recruitment {
+		private String candidateFirstName;
+		private String candidateMiddleName;
+		private String candidateLastName;
+		private String vacancy;
+		private String email;
+		private String contactNumber;
+		private String resumePath;
+		private String keywords;
+		private String dateOfApplication; // yyyy-mm-dd
+		private String notes;
+		private boolean consent;
 
+		public String getCandidateFirstName() {
+			return candidateFirstName;
+		}
+
+		public String getCandidateMiddleName() {
+			return candidateMiddleName;
+		}
+
+		public String getCandidateLastName() {
+			return candidateLastName;
+		}
+
+		public String getVacancy() {
+			return vacancy;
+		}
+
+		public String getEmail() {
+			return email;
+		}
+
+		public String getContactNumber() {
+			return contactNumber;
+		}
+
+		public String getResumePath() {
+			return resumePath;
+		}
+
+		public String getKeywords() {
+			return keywords;
+		}
+
+		public String getDateOfApplication() {
+			return dateOfApplication;
+		}
+
+		public String getNotes() {
+			return notes;
+		}
+
+		public boolean isConsent() {
+			return consent;
+		}
+
+		public void setRecruitment(String first, String middle, String last, String vacancy, String email,
+				String contact, String resumePath, String keywords, String dateOfApplication, String notes,
+				boolean consent) {
+			this.candidateFirstName = first;
+			this.candidateMiddleName = middle;
+			this.candidateLastName = last;
+			this.vacancy = vacancy;
+			this.email = email;
+			this.contactNumber = contact;
+			this.resumePath = resumePath;
+			this.keywords = keywords;
+			this.dateOfApplication = dateOfApplication;
+			this.notes = notes;
+			this.consent = consent;
+		}
+	}
+
+	/* ==================== ROOT getters/setters ==================== */
 	public String getBaseURL() {
 		return baseURL;
 	}
@@ -126,5 +204,15 @@ public class Config {
 	public void setLeaveSearch(String fromDate, String toDate, String employeeName, String status, String leaveType,
 			String subUnit) {
 		this.leaveSearch.setLeaveSearch(fromDate, toDate, employeeName, status, leaveType, subUnit);
+	}
+
+	public Recruitment getRecruitment() {
+		return recruitment;
+	}
+
+	public void setRecruitment(String first, String middle, String last, String vacancy, String email, String contact,
+			String resume, String keywords, String date, String notes, boolean consent) {
+		this.recruitment.setRecruitment(first, middle, last, vacancy, email, contact, resume, keywords, date, notes,
+				consent);
 	}
 }

@@ -9,5 +9,6 @@
 	<classpathentry kind="lib" path="C:/Users/hp/Desktop/saja/year4_sem2/design verfication/selenium-server-4.36.0.jar"/>
 	<classpathentry kind="lib" path="C:/Users/hp/Desktop/saja/year4_sem2/design verfication/testng-7.9.0.jar"/>
 	<classpathentry kind="con" path="org.testng.TESTNG_CONTAINER"/>
+	<classpathentry kind="lib" path="C:/Users/hp/Desktop/QA_Training saja _2025/extentreports-5.1.2.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -17,7 +17,7 @@ public class leaveCtrl {
 	public static void openLeaveList(WebDriver driver, WebDriverWait wait) {
 
 	    POMLeave.leaveMenu(driver).click();
-	    System.out.println("[leave] clicked Leave menu");
+	    //System.out.println("[leave] clicked Leave menu");
 
 	    wait.until(ExpectedConditions.visibilityOfElementLocated(
 	        By.xpath("//h6[contains(@class,'oxd-topbar-header-breadcrumb-module') and normalize-space()='Leave']")
@@ -41,7 +41,7 @@ public class leaveCtrl {
 	        By.xpath("//label[normalize-space()='From Date']/ancestor::div[contains(@class,'oxd-input-group')]//input")
 	    ));
 
-	    System.out.println("[leave] Leave  page loaded");
+	   // System.out.println("[leave] Leave  page loaded");
 	}
 
     // 2) from date
@@ -78,7 +78,7 @@ public class leaveCtrl {
 
 	    selectDateWithPicker(driver, wait, toDate);
 
-	    System.out.println("[leave] To Date picked: " + toDate);
+	    //System.out.println("[leave] To Date picked: " + toDate);
 
 	    wait.until(ExpectedConditions.invisibilityOfElementLocated(
 	        By.xpath("//div[contains(@class,'oxd-date-input-calendar')]")
@@ -112,7 +112,7 @@ public class leaveCtrl {
             ));
             targetYear.click();
         } catch (WebDriverException e) {
-            System.out.println("[leave] Year dropdown not found, skipped year selection.");
+           // System.out.println("[leave] Year dropdown not found, skipped year selection.");
         }
 
         try {
@@ -128,7 +128,7 @@ public class leaveCtrl {
             ));
             Month.click();
         } catch (WebDriverException e) {
-            System.out.println("[leave] month not found");
+          //  System.out.println("[leave] month not found");
         }
 
         WebElement dayButton = wait.until(ExpectedConditions.elementToBeClickable(
@@ -163,7 +163,7 @@ public class leaveCtrl {
         WebElement empInput = POMLeave.employeeNameInput(driver);
         empInput.clear();
         empInput.sendKeys(empname);
-        System.out.println("[leave] Employee name entered: " + empname);
+    //    System.out.println("[leave] Employee name entered: " + empname);
     }
 
     // 5) status dropdown

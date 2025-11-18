@@ -1,0 +1,5 @@
+___TC_LOG_003_emptyFields DIFF___
+Expected: VALIDATION_TRIGGERED_OK
+
+Actual  : VALIDATION_TRIGGERED_OK
+Result  : PASS
