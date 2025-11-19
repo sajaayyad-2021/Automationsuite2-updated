@@ -9,19 +9,16 @@ import com.aventstack.extentreports.ExtentTest;
 
 public class ExtentTestNGITestListener implements ITestListener {
 
-    private static ExtentReports extent = ExtentManager.getInstance();
-    private static ThreadLocal<ExtentTest> test = new ThreadLocal<>();
+    private static final ExtentReports extent = ExtentManager.getInstance();
+    private static final ThreadLocal<ExtentTest> test = new ThreadLocal<>();
 
-    // ====== Optional helper to use inside test classes ======
+    // Expose current test for other classes if needed
     public static ExtentTest getTest() {
         return test.get();
     }
 
-    // ================= TestNG callbacks =================
-
     @Override
     public synchronized void onTestStart(ITestResult result) {
-        // create a new test in the report for each @Test method
         ExtentTest t = extent.createTest(result.getMethod().getMethodName());
         test.set(t);
     }
@@ -42,17 +39,13 @@ public class ExtentTestNGITestListener implements ITestListener {
     }
 
     @Override
-    public synchronized void onStart(ITestContext context) {
-        // nothing extra needed here
-    }
-
-    @Override
     public synchronized void onFinish(ITestContext context) {
-        extent.flush();  // write everything to HTML when suite finishes
+        extent.flush();
     }
 
     @Override
-    public void onTestFailedButWithinSuccessPercentage(ITestResult result) {
-        // not used
-    }
+    public void onStart(ITestContext context) { }
+
+    @Override
+    public void onTestFailedButWithinSuccessPercentage(ITestResult result) { }
 }

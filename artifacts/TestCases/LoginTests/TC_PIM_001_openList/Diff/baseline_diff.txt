@@ -1,5 +1,5 @@
 ___TC_PIM_001_openList DIFF___
-Baseline created for test: TC_PIM_001_openList
-Expected (baseline): EXPECTED=PIM_HEADER_VISIBLE=true
-Actual: PIM_HEADER_VISIBLE=true
-Result  : BASELINE_CREATED_PASS
+Expected: EXPECTED=PIM_HEADER_VISIBLE=true
+
+Actual  : PIM_HEADER_VISIBLE=true
+Result  : FAIL
