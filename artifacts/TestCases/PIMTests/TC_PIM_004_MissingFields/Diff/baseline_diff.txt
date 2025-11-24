@@ -1,0 +1,4 @@
+Expected: PIM_LIST_OPEN=true
+
+Actual  : REQUIRED_VALIDATION=true
+Result  : FAIL

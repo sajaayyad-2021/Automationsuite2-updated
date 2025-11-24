@@ -1,0 +1,4 @@
+Expected: PIM_LIST_OPEN=true
+
+Actual  : PIM_LIST_OPEN=true
+Result  : PASS

@@ -12,5 +12,6 @@
 	<classpathentry kind="lib" path="C:/Users/hp/Desktop/QA_Training saja _2025/extentreports-5.1.2.jar"/>
 	<classpathentry kind="lib" path="C:/Users/hp/Desktop/QA_Training saja _2025/freemarker-2.3.31.jar"/>
 	<classpathentry kind="lib" path="C:/Users/hp/Desktop/QA_Training saja _2025/rxjava-3.1.8.jar"/>
+	<classpathentry kind="lib" path="C:/Users/hp/Downloads/monte-screen-recorder-0.7.7.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

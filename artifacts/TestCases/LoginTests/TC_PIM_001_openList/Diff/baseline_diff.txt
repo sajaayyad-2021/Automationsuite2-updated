@@ -1,5 +1,0 @@
-___TC_PIM_001_openList DIFF___
-Expected: EXPECTED=PIM_HEADER_VISIBLE=true
-
-Actual  : PIM_HEADER_VISIBLE=true
-Result  : FAIL

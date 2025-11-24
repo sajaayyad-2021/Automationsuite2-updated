@@ -1,0 +1,3 @@
+Baseline created for test: TC_PIM_006_SearchEmployee_ByID
+Expected (baseline): FOUND_BY_ID=true
+Actual: FOUND=true

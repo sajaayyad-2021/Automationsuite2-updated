@@ -1,51 +1,56 @@
+
 package reporting;
 
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
 
-import com.aventstack.extentreports.ExtentReports;
-import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.*;
 
 public class ExtentTestNGITestListener implements ITestListener {
 
-    private static final ExtentReports extent = ExtentManager.getInstance();
-    private static final ThreadLocal<ExtentTest> test = new ThreadLocal<>();
+    private static ExtentReports extent;
+    private static ThreadLocal<ExtentTest> parentTest = new ThreadLocal<>();
+    private static ThreadLocal<ExtentTest> childTest = new ThreadLocal<>();
 
-    // Expose current test for other classes if needed
-    public static ExtentTest getTest() {
-        return test.get();
+    @Override
+    public void onStart(ITestContext context) {
+        extent = ExtentManager.getInstance();
+
+        String module = context.getName(); // Regression / LoginTests / PIMTests
+        ExtentTest parent = extent.createTest("Module: " + module);
+        parentTest.set(parent);
     }
 
     @Override
     public synchronized void onTestStart(ITestResult result) {
-        ExtentTest t = extent.createTest(result.getMethod().getMethodName());
-        test.set(t);
+        ExtentTest child = parentTest.get().createNode(result.getMethod().getMethodName());
+        childTest.set(child);
     }
 
     @Override
     public synchronized void onTestSuccess(ITestResult result) {
-        test.get().pass("Test passed");
+        childTest.get().pass("Test Passed");
     }
 
     @Override
     public synchronized void onTestFailure(ITestResult result) {
-        test.get().fail(result.getThrowable());
+        ExtentTest test = childTest.get();
+        test.fail(result.getThrowable());
+
+        try {
+          //  String screenshot = ScreenshotHelper.takeScreenshot(result.getMethod().getMethodName());
+            //test.addScreenCaptureFromPath(screenshot);
+        } catch (Exception ignored) {}
     }
 
     @Override
     public synchronized void onTestSkipped(ITestResult result) {
-        test.get().skip(result.getThrowable());
+        childTest.get().skip("Test Skipped");
     }
 
     @Override
-    public synchronized void onFinish(ITestContext context) {
+    public void onFinish(ITestContext context) {
         extent.flush();
     }
-
-    @Override
-    public void onStart(ITestContext context) { }
-
-    @Override
-    public void onTestFailedButWithinSuccessPercentage(ITestResult result) { }
 }
