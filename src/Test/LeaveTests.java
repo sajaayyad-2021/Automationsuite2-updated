@@ -38,7 +38,7 @@ public class LeaveTests extends BaseTemplate {
     String activeTest = null;
 
     @Test
-    public void RunTests() throws IOException, InterruptedException {
+    public void LeaveSuite() throws IOException, InterruptedException {
 
         extent = ExtentManager.getInstance();
 
@@ -72,7 +72,7 @@ public class LeaveTests extends BaseTemplate {
             testsList = TC.toArray(new String[0]);
         }
 
-        // ----------------- Execute Each TC -----------------
+      
         for (String tc : testsList) {
 
             activeTest = tc;

@@ -32,7 +32,7 @@ public class PIMTests extends BaseTemplate {
     private ExtentTest currentTest;
 
     @Test
-    public void RunTests() throws Exception {
+    public void PIMsuite() throws Exception {
 
         String timestamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
         String className = this.getClass().getSimpleName();

@@ -9,11 +9,11 @@
            </methods>
             <class name="Test.PIMTests"/>
                 <methods>
-        <include name=""/>
+        <include name="PIMsuite"/>
            </methods>
             <class name="Test.LeaveTests"/>
     <methods>
-        <include name=""/>
+        <include name="LeaveSuite"/>
            </methods>
         </classes>
     </test>
