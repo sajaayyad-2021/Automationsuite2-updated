@@ -1,5 +1,0 @@
-___TC_LOG_006_invalidUsername DIFF___
-Expected: MASKED=true
-
-Actual  : Dashboard=false, InvalidCred=true
-Result  : FAIL

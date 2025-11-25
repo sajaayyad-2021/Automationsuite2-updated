@@ -1,8 +1,21 @@
 
 <suite name="AutomationSuite">
-    <test name="Regression">
+
+    <test name="RegressionSuite">
         <classes>
             <class name="Test.LoginTests"/>
+            <methods>
+        <include name="LoginSuite"/>
+           </methods>
+            <class name="Test.PIMTests"/>
+                <methods>
+        <include name=""/>
+           </methods>
+            <class name="Test.LeaveTests"/>
+    <methods>
+        <include name=""/>
+           </methods>
         </classes>
     </test>
+
 </suite>

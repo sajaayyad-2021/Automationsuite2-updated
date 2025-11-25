@@ -45,7 +45,7 @@ public class LoginTests extends BaseTemplate {
     String activeTest = null;
 
     @Test
-    public void RunTests() throws IOException, InterruptedException {
+    public void LoginSuite() throws IOException, InterruptedException {
 
         extent = ExtentManager.getInstance();
 

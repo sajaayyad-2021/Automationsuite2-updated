@@ -34,15 +34,23 @@ public class ExtentTestNGITestListener implements ITestListener {
     }
 
     @Override
+    
     public synchronized void onTestFailure(ITestResult result) {
         ExtentTest test = childTest.get();
-        test.fail(result.getThrowable());
+        Throwable throwable = result.getThrowable();
+        
+        if (throwable != null) {
+            String errorMessage = throwable.getMessage();
+            if (errorMessage.contains("Exception occurred")) {
+                test.fail("Test Failed: " + errorMessage.substring(0, 100));  
+            } else {
+                test.fail(throwable);
+            }
 
-        try {
-          //  String screenshot = ScreenshotHelper.takeScreenshot(result.getMethod().getMethodName());
-            //test.addScreenCaptureFromPath(screenshot);
-        } catch (Exception ignored) {}
+           
+        }
     }
+
 
     @Override
     public synchronized void onTestSkipped(ITestResult result) {

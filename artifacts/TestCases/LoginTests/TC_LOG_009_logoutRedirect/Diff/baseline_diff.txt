@@ -1,5 +1,0 @@
-___TC_LOG_009_logoutRedirect DIFF___
-Expected: MASKED=true
-
-Actual  : Redirect=true
-Result  : FAIL

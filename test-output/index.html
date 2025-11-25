@@ -103,7 +103,7 @@
                     <div class="method-list-content passed suite-AutomationSuite">
                       <span>
                         <img src="passed.png" width="3%"/>
-                        <a href="#" panel-name="suite-AutomationSuite" title="Test.LoginTests" class="method navigator-link" hash-for-method="RunTests">RunTests</a> <!-- method navigator-link -->
+                        <a href="#" panel-name="suite-AutomationSuite" title="Test.LoginTests" class="method navigator-link" hash-for-method="LoginSuite">LoginSuite</a> <!-- method navigator-link -->
                       </span>
                       <br/>
                     </div> <!-- method-list-content passed suite-AutomationSuite -->
@@ -126,9 +126,9 @@
             <div class="main-panel-content rounded-window-bottom">
               <div class="method">
                 <div class="method-content">
-                  <a name="RunTests">
-                  </a> <!-- RunTests -->
-                  <span class="method-name">RunTests</span>
+                  <a name="LoginSuite">
+                  </a> <!-- LoginSuite -->
+                  <span class="method-name">LoginSuite</span>
                 </div> <!-- method-content -->
               </div> <!-- method -->
             </div> <!-- main-panel-content rounded-window-bottom -->
@@ -143,11 +143,25 @@
 &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
 &lt;!DOCTYPE suite SYSTEM &quot;https://testng.org/testng-1.0.dtd&quot;&gt;
 &lt;suite name=&quot;AutomationSuite&quot;&gt;
-  &lt;test thread-count=&quot;5&quot; name=&quot;Regression&quot;&gt;
+  &lt;test thread-count=&quot;5&quot; name=&quot;RegressionSuite&quot;&gt;
     &lt;classes&gt;
-      &lt;class name=&quot;Test.LoginTests&quot;/&gt;
+      &lt;class name=&quot;Test.LoginTests&quot;&gt;
+        &lt;methods&gt;
+          &lt;include name=&quot;LoginSuite&quot;/&gt;
+        &lt;/methods&gt;
+      &lt;/class&gt; &lt;!-- Test.LoginTests --&gt;
+      &lt;class name=&quot;Test.PIMTests&quot;&gt;
+        &lt;methods&gt;
+          &lt;include name=&quot;&quot;/&gt;
+        &lt;/methods&gt;
+      &lt;/class&gt; &lt;!-- Test.PIMTests --&gt;
+      &lt;class name=&quot;Test.LeaveTests&quot;&gt;
+        &lt;methods&gt;
+          &lt;include name=&quot;&quot;/&gt;
+        &lt;/methods&gt;
+      &lt;/class&gt; &lt;!-- Test.LeaveTests --&gt;
     &lt;/classes&gt;
-  &lt;/test&gt; &lt;!-- Regression --&gt;
+  &lt;/test&gt; &lt;!-- RegressionSuite --&gt;
 &lt;/suite&gt; &lt;!-- AutomationSuite --&gt;
             </pre>
           </div> <!-- main-panel-content rounded-window-bottom -->
@@ -159,7 +173,7 @@
           <div class="main-panel-content rounded-window-bottom">
             <ul>
               <li>
-                <span class="test-name">Regression (1 class)</span>
+                <span class="test-name">RegressionSuite (3 classes)</span>
               </li>
             </ul>
           </div> <!-- main-panel-content rounded-window-bottom -->
@@ -187,14 +201,14 @@ data.addColumn('string', 'Class');
 data.addColumn('number', 'Time (ms)');
 data.addRows(1);
 data.setCell(0, 0, 0)
-data.setCell(0, 1, 'RunTests')
+data.setCell(0, 1, 'LoginSuite')
 data.setCell(0, 2, 'Test.LoginTests')
-data.setCell(0, 3, 25845);
+data.setCell(0, 3, 12730);
 window.suiteTableData['AutomationSuite']= { tableData: data, tableDiv: 'times-div-AutomationSuite'}
 return data;
 }
               </script>
-              <span class="suite-total-time">Total running time: 25 seconds</span>
+              <span class="suite-total-time">Total running time: 12 seconds</span>
               <div id="times-div-AutomationSuite">
               </div> <!-- times-div-AutomationSuite -->
             </div> <!-- times-div -->
@@ -209,9 +223,31 @@ return data;
         </div> <!-- panel -->
         <div panel-name="ignored-methods-AutomationSuite" class="panel">
           <div class="main-panel-header rounded-window-top">
-            <span class="header-content">0 ignored methods</span>
+            <span class="header-content">6 ignored methods</span>
           </div> <!-- main-panel-header rounded-window-top -->
           <div class="main-panel-content rounded-window-bottom">
+            <div class="ignored-class-div">
+              <span class="ignored-class-name">Test.LeaveTests</span>
+              <div class="ignored-methods-div">
+                <span class="ignored-method-name">beforeSuiteSetup</span>
+                <br/>
+                <span class="ignored-method-name">afterSuiteCleanup</span>
+                <br/>
+                <span class="ignored-method-name">RunTests</span>
+                <br/>
+              </div> <!-- ignored-methods-div -->
+            </div> <!-- ignored-class-div -->
+            <div class="ignored-class-div">
+              <span class="ignored-class-name">Test.PIMTests</span>
+              <div class="ignored-methods-div">
+                <span class="ignored-method-name">beforeSuiteSetup</span>
+                <br/>
+                <span class="ignored-method-name">RunTests</span>
+                <br/>
+                <span class="ignored-method-name">afterSuiteCleanup</span>
+                <br/>
+              </div> <!-- ignored-methods-div -->
+            </div> <!-- ignored-class-div -->
           </div> <!-- main-panel-content rounded-window-bottom -->
         </div> <!-- panel -->
         <div panel-name="chronological-AutomationSuite" class="panel">
@@ -226,16 +262,16 @@ return data;
                 <span class="method-start">0 ms</span>
               </div> <!-- configuration-suite before -->
               <div class="configuration-method before">
-                <span class="method-name">getMethodname(public void Test.LoginTests.RunTests() throws java.io.IOException,java.lang.InterruptedException)</span>
-                <span class="method-start">5603 ms</span>
+                <span class="method-name">getMethodname(public void Test.LoginTests.LoginSuite() throws java.io.IOException,java.lang.InterruptedException)</span>
+                <span class="method-start">5940 ms</span>
               </div> <!-- configuration-method before -->
               <div class="test-method">
-                <span class="method-name">RunTests</span>
-                <span class="method-start">5611 ms</span>
+                <span class="method-name">LoginSuite</span>
+                <span class="method-start">5947 ms</span>
               </div> <!-- test-method -->
               <div class="configuration-suite after">
                 <span class="method-name">afterSuiteCleanup</span>
-                <span class="method-start">31529 ms</span>
+                <span class="method-start">18827 ms</span>
               </div> <!-- configuration-suite after -->
           </div> <!-- main-panel-content rounded-window-bottom -->
         </div> <!-- panel -->

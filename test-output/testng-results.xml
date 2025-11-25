@@ -2,35 +2,35 @@
 <testng-results ignored="0" total="1" passed="1" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2025-11-24T15:39:16 IST" name="AutomationSuite" finished-at="2025-11-24T15:39:42 IST" duration-ms="25952">
+  <suite started-at="2025-11-25T10:25:50 IST" name="AutomationSuite" finished-at="2025-11-25T10:26:03 IST" duration-ms="12823">
     <groups>
     </groups>
-    <test started-at="2025-11-24T15:39:16 IST" name="Regression" finished-at="2025-11-24T15:39:42 IST" duration-ms="25952">
+    <test started-at="2025-11-25T10:25:50 IST" name="RegressionSuite" finished-at="2025-11-25T10:26:03 IST" duration-ms="12823">
       <class name="Test.LoginTests">
-        <test-method is-config="true" signature="beforeSuiteSetup()[pri:0, instance:Test.LoginTests@1d548a08]" started-at="2025-11-24T15:39:11 IST" name="beforeSuiteSetup" finished-at="2025-11-24T15:39:16 IST" duration-ms="5512" status="PASS">
+        <test-method is-config="true" signature="beforeSuiteSetup()[pri:0, instance:Test.LoginTests@14ec4505]" started-at="2025-11-25T10:25:44 IST" name="beforeSuiteSetup" finished-at="2025-11-25T10:25:50 IST" duration-ms="5861" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- beforeSuiteSetup -->
-        <test-method is-config="true" signature="getMethodname(java.lang.reflect.Method)[pri:0, instance:Test.LoginTests@1d548a08]" started-at="2025-11-24T15:39:16 IST" name="getMethodname" finished-at="2025-11-24T15:39:16 IST" duration-ms="6" status="PASS">
+        <test-method is-config="true" signature="getMethodname(java.lang.reflect.Method)[pri:0, instance:Test.LoginTests@14ec4505]" started-at="2025-11-25T10:25:50 IST" name="getMethodname" finished-at="2025-11-25T10:25:50 IST" duration-ms="5" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[public void Test.LoginTests.RunTests() throws java.io.IOException,java.lang.InterruptedException]]>
+                <![CDATA[public void Test.LoginTests.LoginSuite() throws java.io.IOException,java.lang.InterruptedException]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- getMethodname -->
-        <test-method signature="RunTests()[pri:0, instance:Test.LoginTests@1d548a08]" started-at="2025-11-24T15:39:16 IST" name="RunTests" finished-at="2025-11-24T15:39:42 IST" duration-ms="25845" status="PASS">
+        <test-method signature="LoginSuite()[pri:0, instance:Test.LoginTests@14ec4505]" started-at="2025-11-25T10:25:50 IST" name="LoginSuite" finished-at="2025-11-25T10:26:03 IST" duration-ms="12730" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- RunTests -->
-        <test-method is-config="true" signature="afterSuiteCleanup()[pri:0, instance:Test.LoginTests@1d548a08]" started-at="2025-11-24T15:39:42 IST" name="afterSuiteCleanup" finished-at="2025-11-24T15:39:43 IST" duration-ms="489" status="PASS">
+        </test-method> <!-- LoginSuite -->
+        <test-method is-config="true" signature="afterSuiteCleanup()[pri:0, instance:Test.LoginTests@14ec4505]" started-at="2025-11-25T10:26:03 IST" name="afterSuiteCleanup" finished-at="2025-11-25T10:26:03 IST" duration-ms="585" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- afterSuiteCleanup -->
       </class> <!-- Test.LoginTests -->
-    </test> <!-- Regression -->
+    </test> <!-- RegressionSuite -->
   </suite> <!-- AutomationSuite -->
 </testng-results>

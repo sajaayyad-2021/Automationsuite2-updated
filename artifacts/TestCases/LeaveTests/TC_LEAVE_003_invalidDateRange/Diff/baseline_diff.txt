@@ -1,5 +1,6 @@
-___TC_LOG_001_validLogin DIFF___
-Expected: https://opensource-demo.orangehrmlive.com/web/index.php/dashboard/index
+EXPECTED:
+https://opensource-demo.orangehrmlive.com/web/index.php/dashboard/index
 
-Actual  : https://opensource-demo.orangehrmlive.com/web/index.php/dashboard/index
-Result  : PASS
+ACTUAL:
+INVALID_RANGE_HANDLED
+RESULT: FAIL
