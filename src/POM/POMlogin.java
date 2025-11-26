@@ -95,4 +95,15 @@ public class POMlogin {
         new WebDriverWait(driver, java.time.Duration.ofSeconds(10))
                 .until(ExpectedConditions.visibilityOfElementLocated(invalidCredBox));
     }
+    
+    public static void waitForDashboard(WebDriver driver, int timeoutSeconds) {
+        new WebDriverWait(driver, java.time.Duration.ofSeconds(timeoutSeconds))
+                .until(ExpectedConditions.or(
+                    ExpectedConditions.urlContains("/dashboard"),
+                    ExpectedConditions.visibilityOfElementLocated(
+                        By.xpath("//h6[normalize-space()='Dashboard']")
+                    )
+                ));
+        
+    }
 }

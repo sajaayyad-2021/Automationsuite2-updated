@@ -1,4 +1,0 @@
-Expected: EMP_CREATED=true
-
-Actual  : EMP_ID=4771
-Result  : FAIL

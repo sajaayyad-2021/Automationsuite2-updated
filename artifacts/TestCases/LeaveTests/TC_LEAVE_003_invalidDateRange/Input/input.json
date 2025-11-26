@@ -4,30 +4,12 @@
     "userName": "Admin",
     "passWord": "admin123"
   },
-  "defaults": {
-    "firstName": "Saja",
-    "middleName": "Yaser",
-    "lastName": "Ayyad"
-  },
   "leaveSearch": {
-    "fromDate": "2023-01-01",
-    "toDate": "2023-12-31",
-    "employeeName": "Linda Anderson",
-    "status": "Pending Approval",
-    "leaveType": "US - Vacation",
-    "subUnit": "Engineering"
-  },
-  "recruitment": {
-    "candidateFirstName": "",
-    "candidateMiddleName": "",
-    "candidateLastName": "",
-    "vacancy": "",
-    "email": "",
-    "contactNumber": "",
-    "resumePath": "",
-    "keywords": "",
-    "dateOfApplication": "",
-    "notes": "",
-    "consent": false
+    "fromDate": "2024-12-31",
+    "toDate": "2024-01-01",
+    "employeeName": "",
+    "status": "",
+    "leaveType": "",
+    "subUnit": ""
   }
 }

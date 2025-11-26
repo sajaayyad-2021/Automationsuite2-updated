@@ -1,5 +1,0 @@
-___TC_LOG_005_passwordHidden DIFF___
-Expected: MASKED=true
-
-Actual  : MASKED=true
-Result  : PASS

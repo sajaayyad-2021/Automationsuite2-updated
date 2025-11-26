@@ -1,4 +1,0 @@
-Expected: MIDDLE_UPDATED=true
-
-Actual  : UPDATED=false
-Result  : FAIL

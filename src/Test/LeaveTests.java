@@ -15,6 +15,7 @@ import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import com.aventstack.extentreports.*;
+import com.aventstack.extentreports.markuputils.ExtentColor;
 import com.aventstack.extentreports.markuputils.MarkupHelper;
 
 import reporting.ExtentManager;
@@ -121,9 +122,7 @@ public class LeaveTests extends BaseTemplate {
     }
 
     // Save Baseline/Actual/Diff
-    private void saveDataArtifacts(String className, String testName,
-                                   String actualData, boolean passed) {
-
+    private void saveDataArtifacts(String className, String testName, String actualData) {
         try {
             String baseName     = "baseline.txt";
             String actualFile   = actualPath(className, testName)   + baseName;
@@ -135,37 +134,60 @@ public class LeaveTests extends BaseTemplate {
             File expected = new File(expectedFile);
 
             if (!expected.exists() || expected.length() == 0) {
-
-                CustomFunction.writeTextFile(expectedFile, actualData);
-                CustomFunction.appendToFile("Baseline created.", diffFile);
-
-                currentTest.pass("Baseline CREATED for first run.");
-                currentTest.info(MarkupHelper.createCodeBlock(actualData));
-
+                currentTest.warning("Expected baseline file not found: " + expectedFile);
+                currentTest.info("Please create the expected baseline manually with the correct value.");
+                currentTest.info("Actual value: " + actualData);
+                
+                CustomFunction.appendToFile("___" + testName + " DIFF___", diffFile);
+                CustomFunction.appendToFile("Expected file missing!", diffFile);
+                CustomFunction.appendToFile("Actual: " + actualData, diffFile);
+                
+                currentTest.fail("Expected baseline file not found");
                 return;
             }
 
-            String baseline = Files.readString(Paths.get(expectedFile));
-            boolean match = baseline.trim().equals(actualData.trim());
-            boolean finalResult = passed && match;
+            String baseline = Files.readString(Paths.get(expectedFile)).trim();
+            String actual = actualData.trim();
+            
+            boolean match = baseline.equals(actual);
 
-            CustomFunction.appendToFile("EXPECTED:\n" + baseline, diffFile);
-            CustomFunction.appendToFile("ACTUAL:\n"   + actualData, diffFile);
-            CustomFunction.appendToFile("RESULT: " + (finalResult ? "PASS" : "FAIL"), diffFile);
+            CustomFunction.appendToFile("___" + testName + " DIFF___", diffFile);
+            CustomFunction.appendToFile("Expected: " + baseline, diffFile);
+            CustomFunction.appendToFile("Actual  : " + actual, diffFile);
+            CustomFunction.appendToFile("Result  : " + (match ? "PASS" : "FAIL"), diffFile);
 
-            currentTest.info(
-                    MarkupHelper.createCodeBlock(
-                            "EXPECTED:\n" + baseline + "\n\nACTUAL:\n" + actualData
-                    )
+            String block = String.format(
+                "EXPECTED:\n%s\n\nACTUAL:\n%s\n\nRESULT: %s",
+                baseline, actual, match ? "PASS" : "FAIL"
             );
 
-            if (finalResult)
-                currentTest.pass("Validation PASSED");
-            else
-                currentTest.fail("Baseline mismatch");
+            currentTest.info(MarkupHelper.createCodeBlock(block));
 
-        } catch (Exception e) {
-            currentTest.fail("Failed saving artifacts: " + e.getMessage());
+            if (match) {
+                currentTest.log(Status.PASS,
+                    MarkupHelper.createLabel("✓ Actual matches Expected", ExtentColor.GREEN));
+            } else {
+                currentTest.log(Status.FAIL,
+                    MarkupHelper.createLabel("✗ Baseline mismatch", ExtentColor.RED));
+                currentTest.log(Status.WARNING, "Diff file: " + diffFile);
+            }
+
+        } catch (Exception ex) {
+            if (currentTest != null) {
+                currentTest.fail("Artifact save failed: " + ex.getMessage());
+            }
+        }
+    }
+
+    private void validateTest1(String testName, String className, String actualData) {
+        saveDataArtifacts(className, testName, actualData);
+        
+        String finalResult = resultCheck.checkTestResult(className, testName, SuitePath);
+        
+        if ("PASS".equalsIgnoreCase(finalResult)) {
+            currentTest.pass(testName + ": " + finalResult);
+        } else {
+            currentTest.fail(testName + ": " + finalResult);
         }
     }
 
@@ -174,123 +196,97 @@ public class LeaveTests extends BaseTemplate {
     // ======================================================
 
 
-    // 1) BASIC SEARCH
-    private void TC_LEAVE_001_basicSearch(Config cfg, String cn) {
+ // 1) BASIC SEARCH
+ private void TC_LEAVE_001_basicSearch(Config cfg, String cn) {
+     try {
+         currentTest.info("Leave Basic Search");
+         
+         String result = mf.performLeaveSearch(cfg);
+         
+         validateTest1("TC_LEAVE_001_basicSearch", cn, result);
+         
+     } catch (Exception e) {
+         currentTest.fail("Exception: " + e.getMessage());
+         e.printStackTrace();
+     }
+ }
 
-        currentTest.info("Leave Basic Search");
+ // 2) SEARCH BY EMPLOYEE
+ private void TC_LEAVE_002_searchWithEmployeeName(Config cfg, String cn) {
+     try {
+         currentTest.info("Search using Employee Name");
+         
+         String result = mf.performLeaveSearch(cfg);
+         
+         validateTest1("TC_LEAVE_002_searchWithEmployeeName", cn, result);
+         
+     } catch (Exception e) {
+         currentTest.fail("Exception: " + e.getMessage());
+         e.printStackTrace();
+     }
+ }
 
-        boolean ok = mf.basicLeaveSearch(cfg);
-        String data = ok ? "SEARCH_OK" : "SEARCH_FAIL";
+ // 3) INVALID DATE RANGE
+ private void TC_LEAVE_003_invalidDateRange(Config cfg, String cn) {
+     try {
+         currentTest.info("Invalid Date Range Test");
+         
+         String result = mf.performLeaveSearch(cfg);
+         
+         validateTest1("TC_LEAVE_003_invalidDateRange", cn, result);
+         
+     } catch (Exception e) {
+         currentTest.fail("Exception: " + e.getMessage());
+         e.printStackTrace();
+     }
+ }
 
-        saveDataArtifacts(cn, "TC_LEAVE_001_basicSearch", data, ok);
+ // 4) SELECT STATUS
+ private void TC_LEAVE_004_selectLeaveStatus(Config cfg, String cn) {
+     try {
+         currentTest.info("Leave Status Selection");
+         
+         String result = mf.performLeaveSearch(cfg);
+         
+         validateTest1("TC_LEAVE_004_selectLeaveStatus", cn, result);
+         
+     } catch (Exception e) {
+         currentTest.fail("Exception: " + e.getMessage());
+         e.printStackTrace();
+     }
+ }
 
-        String finalResult =
-                resultCheck.checkTestResult(cn, "TC_LEAVE_001_basicSearch", SuitePath);
+ // 5) SELECT LEAVE TYPE
+ private void TC_LEAVE_005_selectLeaveType(Config cfg, String cn) {
+     try {
+         currentTest.info("Leave Type Selection");
+         
+         String result = mf.performLeaveSearch(cfg);
+         
+         validateTest1("TC_LEAVE_005_selectLeaveType", cn, result);
+         
+     } catch (Exception e) {
+         currentTest.fail("Exception: " + e.getMessage());
+         e.printStackTrace();
+     }
+ }
 
-        if (finalResult.equalsIgnoreCase("PASS"))
-            currentTest.pass(finalResult);
-        else
-            currentTest.fail(finalResult);
+ // 6) RESET BUTTON
+ private void TC_LEAVE_006_resetButton(Config cfg, String cn) {
+     try {
+         currentTest.info("Reset Button Test");
+         
+         String result = mf.performLeaveReset(cfg);
+         
+         validateTest1("TC_LEAVE_006_resetButton", cn, result);
+         
+     } catch (Exception e) {
+         currentTest.fail("Exception: " + e.getMessage());
+         e.printStackTrace();
+     }
+ }
+
+ // Add validateTest method (same as PIMTests)
+
+
     }
-
-
-    // 2) SEARCH BY EMPLOYEE
-    private void TC_LEAVE_002_searchWithEmployeeName(Config cfg, String cn) {
-
-        currentTest.info("Search using Employee Name");
-
-        boolean ok = mf.searchLeaveByEmployee(cfg);
-        String data = ok ? "FOUND" : "NOT_FOUND";
-
-        saveDataArtifacts(cn, "TC_LEAVE_002_searchWithEmployeeName", data, ok);
-
-        String finalResult =
-                resultCheck.checkTestResult(cn, "TC_LEAVE_002_searchWithEmployeeName", SuitePath);
-
-        if (finalResult.equalsIgnoreCase("PASS"))
-            currentTest.pass(finalResult);
-        else
-            currentTest.fail(finalResult);
-    }
-
-
-    // 3) INVALID DATE RANGE
-    private void TC_LEAVE_003_invalidDateRange(Config cfg, String cn) {
-
-        currentTest.info("Invalid Date Range Test");
-
-        boolean ok = mf.invalidDateRange(cfg);
-        String data = ok ? "INVALID_RANGE_HANDLED" : "CRASH";
-
-        saveDataArtifacts(cn, "TC_LEAVE_003_invalidDateRange", data, ok);
-
-        String finalResult =
-                resultCheck.checkTestResult(cn, "TC_LEAVE_003_invalidDateRange", SuitePath);
-
-        if (finalResult.equalsIgnoreCase("PASS"))
-            currentTest.pass(finalResult);
-        else
-            currentTest.fail(finalResult);
-    }
-
-
-    // 4) SELECT STATUS
-    private void TC_LEAVE_004_selectLeaveStatus(Config cfg, String cn) {
-
-        currentTest.info("Leave Status Selection");
-
-        boolean ok = mf.selectLeaveStatus(cfg);
-        String data = ok ? "STATUS_OK" : "STATUS_FAIL";
-
-        saveDataArtifacts(cn, "TC_LEAVE_004_selectLeaveStatus", data, ok);
-
-        String finalResult =
-                resultCheck.checkTestResult(cn, "TC_LEAVE_004_selectLeaveStatus", SuitePath);
-
-        if (finalResult.equalsIgnoreCase("PASS"))
-            currentTest.pass(finalResult);
-        else
-            currentTest.fail(finalResult);
-    }
-
-
-    // 5) SELECT LEAVE TYPE
-    private void TC_LEAVE_005_selectLeaveType(Config cfg, String cn) {
-
-        currentTest.info("Leave Type Selection");
-
-        boolean ok = mf.selectLeaveTypeOnly(cfg);
-        String data = ok ? "TYPE_OK" : "TYPE_FAIL";
-
-        saveDataArtifacts(cn, "TC_LEAVE_005_selectLeaveType", data, ok);
-
-        String finalResult =
-                resultCheck.checkTestResult(cn, "TC_LEAVE_005_selectLeaveType", SuitePath);
-
-        if (finalResult.equalsIgnoreCase("PASS"))
-            currentTest.pass(finalResult);
-        else
-            currentTest.fail(finalResult);
-    }
-
-
-    // 6) RESET BUTTON
-    private void TC_LEAVE_006_resetButton(Config cfg, String cn) {
-
-        currentTest.info("Reset Button Test");
-
-        boolean ok = mf.resetLeaveFilters();
-        String data = ok ? "RESET_OK" : "RESET_FAIL";
-
-        saveDataArtifacts(cn, "TC_LEAVE_006_resetButton", data, ok);
-
-        String finalResult =
-                resultCheck.checkTestResult(cn, "TC_LEAVE_006_resetButton", SuitePath);
-
-        if (finalResult.equalsIgnoreCase("PASS"))
-            currentTest.pass(finalResult);
-        else
-            currentTest.fail(finalResult);
-    }
-
-}

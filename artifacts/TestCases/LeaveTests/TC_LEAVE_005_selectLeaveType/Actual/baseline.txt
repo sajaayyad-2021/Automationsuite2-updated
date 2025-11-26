@@ -1,1 +1,1 @@
-TYPE_OK
+TYPE_FAIL

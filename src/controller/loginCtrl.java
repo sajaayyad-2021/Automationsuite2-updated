@@ -3,37 +3,48 @@ package controller;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import POM.POMlogin;  // Import the POM for login page elements
+
 import java.time.Duration;
 
 public class loginCtrl {
 
-	public static void fillUsername(WebDriver driver, String username) {
-		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(12));
-		WebElement userField = wait.until(ExpectedConditions
-				.elementToBeClickable(By.cssSelector("input[name='username'], input[placeholder='Username']")));
-		try {
-			userField.clear();
-		} catch (InvalidElementStateException ignored) {}
-		userField.sendKeys(username);
-		// System.out.println("[login] username typed: " + username);
-	}
+    // Fill the username field using the POM method (no need to re-fetch the element)
+    public static void fillUsername(WebDriver driver, String username) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(12));
+        WebElement userField = wait.until(ExpectedConditions
+                .elementToBeClickable(POMlogin.usernameField(driver))); // Using POM to get the locator
+        try {
+            userField.clear();
+        } catch (InvalidElementStateException ignored) {}
+        userField.sendKeys(username);
+    }
 
-	public static void fillpassword(WebDriver driver, String password) {
-		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(12));
-		WebElement passField = wait.until(ExpectedConditions
-				.elementToBeClickable(By.cssSelector("input[name='password'], input[placeholder='Password']")));
-		try {
-			passField.clear();
-		} catch (InvalidElementStateException ignored) {}
-		passField.sendKeys(password);
-		// System.out.println("[login]  password typed: " + password);
-	}
+    // Fill the password field using the POM method (no need to re-fetch the element)
+    public static void fillPassword(WebDriver driver, String password) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(12));
+        WebElement passField = wait.until(ExpectedConditions
+                .elementToBeClickable(POMlogin.passwordField(driver))); // Using POM to get the locator
+        try {
+            passField.clear();
+        } catch (InvalidElementStateException ignored) {}
+        passField.sendKeys(password);
+    }
 
-	public static void clicklogin(WebDriver driver) {
-		WebElement btn = new WebDriverWait(driver, Duration.ofSeconds(10))
-				.until(ExpectedConditions.elementToBeClickable(By.cssSelector("button[type='submit']")));
-		btn.click();
-		// System.out.println("[login] clicked login button");
-		// System.out.println("[login]  credentials submitted");
-	}
+    // Click the login button using the POM method (no need to re-fetch the element)
+    public static void clickLogin(WebDriver driver) {
+        WebElement btn = new WebDriverWait(driver, Duration.ofSeconds(10))
+                .until(ExpectedConditions.elementToBeClickable(POMlogin.loginButton(driver))); // Using POM here
+        btn.click();
+    }
+    
+
+    public static boolean waitForDashboard(WebDriver driver, int timeoutSeconds) {
+        try {
+            POMlogin.waitForDashboard(driver, timeoutSeconds);
+            return true;
+        } catch (org.openqa.selenium.TimeoutException e) {
+            return false;
+        }
+    }
 }

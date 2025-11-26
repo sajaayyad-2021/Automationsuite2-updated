@@ -2,5 +2,5 @@ EXPECTED:
 https://opensource-demo.orangehrmlive.com/web/index.php/dashboard/index
 
 ACTUAL:
-INVALID_RANGE_HANDLED
+CRASH
 RESULT: FAIL

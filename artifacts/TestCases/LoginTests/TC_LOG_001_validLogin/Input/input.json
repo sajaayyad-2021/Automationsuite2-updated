@@ -5,9 +5,9 @@
     "passWord": "admin123"
   },
   "defaults": {
-    "firstName": "Saja",
-    "middleName": "Yaser",
-    "lastName": "Ayyad"
+    "firstName": "",
+    "middleName": "",
+    "lastName": ""
   },
   "leaveSearch": {
     "fromDate": "",

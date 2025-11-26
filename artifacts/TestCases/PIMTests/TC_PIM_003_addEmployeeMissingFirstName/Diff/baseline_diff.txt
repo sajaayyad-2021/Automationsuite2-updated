@@ -1,0 +1,4 @@
+___TC_PIM_003_addEmployeeMissingFirstName DIFF___
+Expected: VALIDATION_SHOWN
+Actual  : VALIDATION_SHOWN
+Result  : PASS

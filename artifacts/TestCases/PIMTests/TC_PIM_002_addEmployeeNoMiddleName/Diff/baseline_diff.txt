@@ -1,0 +1,4 @@
+___TC_PIM_002_addEmployeeNoMiddleName DIFF___
+Expected: [EMPID_PATTERN]
+Actual  : UNKNOWN_STATE
+Result  : FAIL
