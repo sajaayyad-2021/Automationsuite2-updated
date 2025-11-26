@@ -158,5 +158,3 @@ public class BaseTemplate {
         } catch (Exception ignored) {}
     }
 }
-
-

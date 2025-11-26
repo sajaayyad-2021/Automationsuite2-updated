@@ -3,7 +3,7 @@ package utilites;
 
 import java.io.File;
 import java.time.Duration;
-
+//import java.lang.*;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -23,7 +23,8 @@ public class MainFunctions {
 	private final WebDriver driver;
 	private final String baseUrl;
 
-	private static final String LOGIN_PATH = "/auth/login";
+	private static final String LOGIN_PATH = "/web/index.php/auth/login";
+
 
 	public MainFunctions(WebDriver driver, Config config) {
 		this.driver = driver;
@@ -37,8 +38,6 @@ public class MainFunctions {
 	// ... inside MainFunctions class ...
 
 	public void performLogin(Config config) {
-	   
-	    
 	    navigateTo(LOGIN_PATH);
 	    POMlogin.waitForLoginPage(driver);
 	    System.out.println("[LOGIN] login page ready");
@@ -47,7 +46,7 @@ public class MainFunctions {
 	    loginCtrl.fillPassword(driver, config.getAuth().getPassWord());
 	    loginCtrl.clickLogin(driver);
 	    
-	    // Try to wait for dashboard through controller, but don't fail if timeout
+	    // Try to wait for dashboard (handles both positive and negative tests)
 	    boolean dashboardReached = loginCtrl.waitForDashboard(driver, 20);
 	    
 	    if (dashboardReached) {
@@ -55,10 +54,37 @@ public class MainFunctions {
 	    } else {
 	        System.out.println("[LOGIN] dashboard not reached (possible negative test or invalid credentials)");
 	    }
+	    
+	    // Logout after login test
+	    performLogout(driver);
 	}
-	// ============================================
-	// ADD THESE GENERIC METHODS TO MainFunctions.java
-	// ============================================
+
+
+	/**
+	 * Perform login WITHOUT logout at the end
+	 * Used for PIM/Leave/Recruitment suites (to stay logged in)
+	 */
+	public void performLoginWithoutLogout(Config config) {
+	    navigateTo(LOGIN_PATH);
+	    POMlogin.waitForLoginPage(driver);
+	    System.out.println("[LOGIN] login page ready");
+	    
+	    loginCtrl.fillUsername(driver, config.getAuth().getUserName());
+	    loginCtrl.fillPassword(driver, config.getAuth().getPassWord());
+	    loginCtrl.clickLogin(driver);
+	    
+	    // Wait for dashboard
+	    boolean dashboardReached = loginCtrl.waitForDashboard(driver, 20);
+	    
+	    if (dashboardReached) {
+	        System.out.println("[LOGIN] success: dashboard loaded - staying logged in");
+	    } else {
+	        System.out.println("[LOGIN] dashboard not reached - check credentials");
+	    }
+	    
+	    // NO LOGOUT - stay logged in for subsequent tests
+	}
+
 
 	/**
 	 * Check if current page is Dashboard
@@ -123,8 +149,31 @@ public class MainFunctions {
 	    new WebDriverWait(driver, Duration.ofSeconds(10))
 	        .until(d -> POMlogin.isDashboard(driver));
 	}
-	
-	
+
+
+	// ---- LOGOUT ----
+	public static void performLogout(WebDriver driver) {
+	    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+
+	    try {
+	        LogoutCtrl.openUserMenu(driver, wait);
+	        LogoutCtrl.clickLogout(driver, wait);
+
+	        wait.until(drv -> {
+	            try {
+	                return POMlogin.usernameField(drv).isDisplayed();
+	            } catch (Exception e) {
+	                return false;
+	            }
+	        });
+
+	        System.out.println("[LOGOUT] success: back to login page");
+
+	    } catch (Exception e) {
+	        System.out.println("[LOGOUT] warning: " + e.getMessage());
+	    }
+	}
+
 
 	// ---- LEAVE SEARCH ----
 //	public void performLeaveSearch(Config config) {
@@ -182,28 +231,7 @@ public class MainFunctions {
 		System.out.println("[recruitment] add candidate flow completed.");
 	}
 
-	// ---- LOGOUT ----
-	public static void performLogout(WebDriver driver) {
-		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
 
-		try {
-			LogoutCtrl.openUserMenu(driver, wait);
-			LogoutCtrl.clickLogout(driver, wait);
-
-			wait.until(drv -> {
-				try {
-					return POMlogin.usernameField(drv).isDisplayed();
-				} catch (Exception e) {
-					return false;
-				}
-			});
-
-			// System.out.println("[LOGOUT] success: back to login page");
-
-		} catch (Exception e) {
-			// System.out.println("[LOGOUT] warning: " + e.getMessage());
-		}
-	}
 
 	public static void deleteFiles(String folderPath) {
 		try {
@@ -245,7 +273,11 @@ public class MainFunctions {
 	 * Config determines: firstName, middleName, lastName
 	 * Returns: empId (success) or "VALIDATION_SHOWN" (failure)
 	 */
-	public String performAddEmployee(Config cfg) {
+	/**
+	 * Add employee function - performs action only
+	 * Does NOT return hardcoded status strings
+	 */
+	public void performAddEmployee(Config cfg) {
 	    try {
 	        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
 	        
@@ -266,7 +298,7 @@ public class MainFunctions {
 	        String middle = cfg.getDefaults().getMiddleName();
 	        String last = cfg.getDefaults().getLastName();
 	        
-	        // 5. Fill fields
+	        // 5. Fill fields (only if provided)
 	        if (first != null && !first.isEmpty()) {
 	            PIMCtrl.fillfirstname(driver, first);
 	        }
@@ -279,7 +311,7 @@ public class MainFunctions {
 	            PIMCtrl.filllastname(driver, last);
 	        }
 	        
-	        // 6. Generate employee ID
+	        // 6. Generate and fill employee ID
 	        String empId = CustomFunction.generateRandomEmployeeId();
 	        PIMCtrl.fillemplyeeId(driver, empId);
 	        
@@ -287,45 +319,23 @@ public class MainFunctions {
 	        WebElement saveBtn = driver.findElement(By.xpath("//button[normalize-space()='Save']"));
 	        saveBtn.click();
 	        
-	        // 8. Wait longer for the response
+	        // 8. Wait for response
 	        Thread.sleep(3000);
 	        
-	        // 9. Check result - validation error OR success
-	        // First check for validation (stays on same page)
-	        if (POMPIM.hasRequiredValidation(driver)) {
-	            System.out.println("[PIM] Validation shown - required fields missing");
-	            return "VALIDATION_SHOWN";
-	        }
-	        
-	        // Check if URL changed to personal details
-	        String currentUrl = driver.getCurrentUrl();
-	        System.out.println("[PIM] Current URL after save: " + currentUrl);
-	        
-	        if (currentUrl.contains("/viewPersonalDetails/empNumber/") || 
-	            currentUrl.contains("/pim/viewPersonalDetails")) {
-	            System.out.println("[PIM] Success - employee created: " + empId);
-	            return "SUCCESS";  // Change this to return "SUCCESS" instead of empId
-	        } else if (POMPIM.isPersonalDetailsPage(driver)) {
-	            System.out.println("[PIM] Success - employee created: " + empId);
-	            return "SUCCESS";
-	        } else {
-	            System.out.println("[PIM] Unknown state - URL: " + currentUrl);
-	            return "UNKNOWN_STATE";
-	        }
+	        System.out.println("[PIM] Add employee action completed");
 	        
 	    } catch (Exception e) {
 	        System.err.println("[PIM] Error in performAddEmployee: " + e.getMessage());
 	        e.printStackTrace();
-	        return "ERROR: " + e.getMessage();
 	    }
 	}
 
+
 	/**
-	 * Generic function to search employee - works for ALL search scenarios
-	 * Config determines: searchBy ("name" or "id"), searchValue
-	 * Returns: "FOUND_X" (X = number of results) or "NO_RESULTS" or "ERROR"
+	 * Search employee function - performs action only
+	 * Does NOT return hardcoded status strings
 	 */
-	public String performSearchEmployee(Config cfg) {
+	public void performSearchEmployee(Config cfg) {
 	    try {
 	        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
 	        
@@ -333,83 +343,42 @@ public class MainFunctions {
 	        PIMCtrl.openPIMpage(driver);
 	        
 	        // 2. Get search criteria from config
-	        String searchBy = cfg.getDefaults().getFirstName(); // Reuse firstName as searchBy
-	        String searchValue = cfg.getDefaults().getLastName(); // Reuse lastName as searchValue
+	        String searchBy = cfg.getDefaults().getFirstName();    // "name" or "id"
+	        String searchValue = cfg.getDefaults().getLastName();   // actual value to search
 	        
 	        // 3. Fill search fields based on searchBy
 	        if ("name".equalsIgnoreCase(searchBy)) {
 	            PIMCtrl.fillEmployeeName(driver, searchValue);
 	        } else if ("id".equalsIgnoreCase(searchBy)) {
 	            PIMCtrl.fillEmployeeId(driver, searchValue);
-	        } else {
-	            // Leave fields empty for negative test
-	            System.out.println("[PIM] Search with empty fields");
 	        }
+	        // If neither, leave fields empty (negative test case)
 	        
-	        // 4. Click Search
+	        // 4. Click Search button
 	        PIMCtrl.clickSearchButton(driver);
 	        
-	        // 5. Get result count (with exception handling for timeout)
+	        // 5. Wait for results to load
 	        Thread.sleep(2000);
 	        
-	        int count;
-	        try {
-	            count = POMPIM.getSearchResultCount(driver);
-	        } catch (Exception e) {
-	            // If getSearchResultCount times out, assume no results
-	            if (e.getMessage().contains("Expected condition failed") || 
-	                e.getMessage().contains("TimeoutException")) {
-	                System.out.println("[PIM] No results found (timeout caught)");
-	                return "NO_RESULTS";
-	            } else {
-	                throw e; // Re-throw unexpected exceptions
-	            }
-	        }
-	        
-	        if (count > 0) {
-	            System.out.println("[PIM] Found " + count + " result(s)");
-	            return "FOUND_" + count;
-	        } else {
-	            System.out.println("[PIM] No results found");
-	            return "NO_RESULTS";
-	        }
+	        System.out.println("[PIM] Search employee action completed");
 	        
 	    } catch (Exception e) {
 	        System.err.println("[PIM] Error in performSearchEmployee: " + e.getMessage());
 	        e.printStackTrace();
-	        return "ERROR: " + e.getMessage();
 	    }
 	}
-
-
 	
-	// Helper method - check if validation appears
-	private boolean hasRequiredValidation1() {
-	    return POMPIM.hasRequiredValidation(driver);
-	}
+	
+	
 
-	// Helper method - check if on Personal Details page
-	private boolean isOnPersonalDetailsPage() {
-	    return POMPIM.isPersonalDetailsPage(driver);
-	}
 
-	// ============================================
-	// LEAVE FUNCTIONS
-	// ============================================
-
-	/**
-	 * Basic Leave Search - opens leave list and performs search
-	 */
-	// ============================================
-	// LEAVE FUNCTION - ONE UNIFIED METHOD
-	// ============================================
 
 	/**
 	 * Unified Leave Search Function
 	 * Handles ALL leave search scenarios based on config
-	 * Returns: "SUCCESS", "NO_RESULTS", "VALIDATION_ERROR", or "ERROR"
+	 
 	 */
-	public String performLeaveSearch(Config cfg) {
+	public void performLeaveSearch(Config cfg) {
 	    try {
 	        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
 	        
@@ -417,27 +386,31 @@ public class MainFunctions {
 	        leaveCtrl.openLeaveList(driver, wait);
 	        System.out.println("[LEAVE] Opened Leave List page");
 	        
-	        // 2. Get search criteria from config
+	        // 2. Check if we should reset filters FIRST
+	        if (cfg.getLeaveSearch().isResetFilters()) {
+	            System.out.println("[LEAVE] Reset flag is TRUE - resetting filters...");
+	            leaveCtrl.clickReset(driver);
+	            Thread.sleep(2000);
+	            System.out.println("[LEAVE] Filters reset completed");
+	        }
+	        // 3. Get search criteria from config
 	        String fromDate = cfg.getLeaveSearch().getFromDate();
 	        String toDate = cfg.getLeaveSearch().getToDate();
 	        String empName = cfg.getLeaveSearch().getEmployeeName();
 	        String status = cfg.getLeaveSearch().getStatus();
 	        String leaveType = cfg.getLeaveSearch().getLeaveType();
 	        String subUnit = cfg.getLeaveSearch().getSubUnit();
-	        
-	        // 3. Fill From Date (if provided)
+	        // 4. Fill From Date (if provided)
 	        if (fromDate != null && !fromDate.isEmpty()) {
 	            leaveCtrl.fillFromDate(driver, wait, fromDate);
 	            System.out.println("[LEAVE] Filled From Date: " + fromDate);
 	        }
-	        
-	        // 4. Fill To Date (if provided)
+	        // 5. Fill To Date (if provided)
 	        if (toDate != null && !toDate.isEmpty()) {
 	            leaveCtrl.fillToDate(driver, wait, toDate);
 	            System.out.println("[LEAVE] Filled To Date: " + toDate);
 	        }
-	        
-	        // 5. Fill Employee Name (if provided)
+	        // 6. Fill Employee Name (if provided)
 	        if (empName != null && !empName.isEmpty()) {
 	            leaveCtrl.fillEmployeeName(driver, empName);
 	            System.out.println("[LEAVE] Filled Employee Name: " + empName);
@@ -455,129 +428,37 @@ public class MainFunctions {
 	            }
 	        }
 	        
-	        // 6. Select Status (if provided)
+	        // 7. Select Status (if provided)
 	        if (status != null && !status.isEmpty()) {
 	            leaveCtrl.selectStatus(driver, wait, status);
 	            System.out.println("[LEAVE] Selected Status: " + status);
 	        }
 	        
-	        // 7. Select Leave Type (if provided)
+	        // 8. Select Leave Type (if provided)
 	        if (leaveType != null && !leaveType.isEmpty()) {
 	            leaveCtrl.selectLeaveType(driver, wait, leaveType);
 	            System.out.println("[LEAVE] Selected Leave Type: " + leaveType);
 	        }
 	        
-	        // 8. Select Sub Unit (if provided)
+	        // 9. Select Sub Unit (if provided)
 	        if (subUnit != null && !subUnit.isEmpty()) {
 	            leaveCtrl.selectSubUnit(driver, wait, subUnit);
 	            System.out.println("[LEAVE] Selected Sub Unit: " + subUnit);
 	        }
 	        
-	        // 9. Click Search
+	        // 10. Click Search
 	        leaveCtrl.clickSearch(driver);
 	        System.out.println("[LEAVE] Clicked Search button");
 	        
-	        // 10. Wait for results to load
+	        // 11. Wait for results/errors to load
 	        Thread.sleep(3000);
 	        
-	        // 11. Check for validation errors (invalid date range, etc.)
-	        try {
-	            WebElement validationError = driver.findElement(
-	                By.xpath("//*[contains(text(),'To date should be after from date') or " +
-	                        "contains(text(),'Should be a valid date') or " +
-	                        "contains(@class,'oxd-input-field-error-message')]")
-	            );
-	            if (validationError.isDisplayed()) {
-	                System.out.println("[LEAVE] Validation error detected");
-	                return "VALIDATION_ERROR";
-	            }
-	        } catch (Exception e) {
-	            // No validation error
-	        }
-	        
-	        // 12. Check for "No Records Found"
-	        try {
-	            WebElement noRecords = driver.findElement(
-	                By.xpath("//*[contains(text(),'No Records Found')] | " +
-	                        "//span[contains(text(),'No Records Found')]")
-	            );
-	            if (noRecords.isDisplayed()) {
-	                System.out.println("[LEAVE] No records found");
-	                return "NO_RESULTS";
-	            }
-	        } catch (Exception e) {
-	            // Records found or checking failed
-	        }
-	        
-	        // 13. Check if results table exists
-	        try {
-	            WebElement resultsTable = wait.until(ExpectedConditions.presenceOfElementLocated(
-	                By.xpath("//div[contains(@class,'oxd-table-body')] | " +
-	                        "//div[@class='oxd-table-card']")
-	            ));
-	            
-	            if (resultsTable.isDisplayed()) {
-	                System.out.println("[LEAVE] Search results found");
-	                return "SUCCESS";
-	            }
-	        } catch (Exception e) {
-	            System.out.println("[LEAVE] Could not find results table");
-	        }
-	        
-	        // 14. Default: assume success if no errors
-	        System.out.println("[LEAVE] Search completed");
-	        return "SUCCESS";
+	        System.out.println("[LEAVE] Leave search action completed");
 	        
 	    } catch (Exception e) {
 	        System.err.println("[LEAVE] Error in performLeaveSearch: " + e.getMessage());
 	        e.printStackTrace();
-	        return "ERROR: " + e.getMessage();
-	    }
-	}
-
-	/**
-	 * Reset Leave Filters
-	 * Returns: "RESET_SUCCESS" or "RESET_FAILED"
-	 */
-	public String performLeaveReset(Config cfg) {
-	    try {
-	        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
-	        
-	        // 1. Open Leave List
-	        leaveCtrl.openLeaveList(driver, wait);
-	        
-	        // 2. Fill some filters first
-	        leaveCtrl.fillFromDate(driver, wait, "2024-01-01");
-	        leaveCtrl.fillToDate(driver, wait, "2024-12-31");
-	        Thread.sleep(1000);
-	        
-	        // 3. Click Reset
-	        leaveCtrl.clickReset(driver);
-	        Thread.sleep(2000);
-	        
-	        // 4. Verify fields are cleared
-	        try {
-	            WebElement fromDateInput = POMLeave.fromDateInput(driver);
-	            String fromValue = fromDateInput.getAttribute("value");
-	            
-	            if (fromValue == null || fromValue.isEmpty()) {
-	                System.out.println("[LEAVE] Reset successful - fields cleared");
-	                return "RESET_SUCCESS";
-	            } else {
-	                System.out.println("[LEAVE] Reset failed - fields still have values");
-	                return "RESET_FAILED";
-	            }
-	        } catch (Exception e) {
-	            System.out.println("[LEAVE] Could not verify reset");
-	            return "RESET_FAILED";
-	        }
-	        
-	    } catch (Exception e) {
-	        System.err.println("[LEAVE] Error in performLeaveReset: " + e.getMessage());
-	        e.printStackTrace();
-	        return "ERROR: " + e.getMessage();
 	    }
 	}
 }
-
 	

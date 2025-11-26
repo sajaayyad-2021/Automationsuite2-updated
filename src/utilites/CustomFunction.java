@@ -29,11 +29,12 @@ public class CustomFunction {
             String status    = extractValue(clean, "\"status\"");
             String leaveType = extractValue(clean, "\"leaveType\"");
             String subUnit   = extractValue(clean, "\"subUnit\"");
+            
 
             cfg.setBaseURL(baseURL);
             cfg.setAuth(userName, passWord);
             cfg.setDefaults(firstName, middle, lastName);
-            cfg.setLeaveSearch(fromDate, toDate, empName, status, leaveType, subUnit);
+            boolean resetFilters = extractBoolean(clean, "\"resetFilters\"");
 
             String recruitmentSection = extractSection(clean, "\"recruitment\"");
             if (!recruitmentSection.isEmpty()) {

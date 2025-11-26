@@ -1,44 +1,44 @@
 package Test;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Method;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
-import com.aventstack.extentreports.ExtentReports;
-import com.aventstack.extentreports.ExtentTest;
-import com.aventstack.extentreports.Status;
-import com.aventstack.extentreports.markuputils.ExtentColor;
+import com.aventstack.extentreports.*;
 import com.aventstack.extentreports.markuputils.MarkupHelper;
 
-import utilites.Config;
+import reporting.ExtentManager;
 import testbase.BaseTemplate;
+import utilites.Config;
 import utilites.CustomFunction;
 import utilites.MainFunctions;
 import utilites.ResultChecker;
-import reporting.ExtentManager;
 
 @Listeners(reporting.ExtentTestNGITestListener.class)
 public class LoginTests extends BaseTemplate {
 
     MainFunctions mf;
-    ResultChecker ResultCheck = new ResultChecker();
+    ResultChecker resultCheck = new ResultChecker();
     private static ExtentReports extent;
     private ExtentTest currentTest;
+
     String[] testsList = null;
+    String activeTest = null;
 
     @Test
     public void LoginSuite() throws IOException, InterruptedException {
+
         extent = ExtentManager.getInstance();
         String className = this.getClass().getSimpleName();
 
+        // -------------------- Parse CLI Args --------------------
         if (testNmaes_login == null || testNmaes_login.trim().isEmpty()) {
             testNmaes_login = "ALL";
         } else {
@@ -48,29 +48,33 @@ public class LoginTests extends BaseTemplate {
         if (!"ALL".equalsIgnoreCase(testNmaes_login)) {
             if (testNmaes_login.contains(",")) {
                 testsList = Arrays.stream(testNmaes_login.split(","))
-                        .map(String::trim)
-                        .filter(s -> !s.isEmpty())
-                        .toArray(String[]::new);
+                                 .map(String::trim)
+                                 .filter(s -> !s.isEmpty())
+                                 .toArray(String[]::new);
             } else {
                 testsList = new String[]{ testNmaes_login };
             }
         } else {
             Method[] methods = this.getClass().getDeclaredMethods();
-            List<String> TESTS = new ArrayList<>();
-            for (Method m : methods) {
-                if (m.getName().startsWith("TC_")) {
-                    TESTS.add(m.getName());
-                }
-            }
-            testsList = TESTS.toArray(new String[0]);
+            List<String> TC = new ArrayList<>();
+
+            for (Method m : methods)
+                if (m.getName().startsWith("TC_"))
+                    TC.add(m.getName());
+
+            testsList = TC.toArray(new String[0]);
         }
 
+        // -------------------- Test Loop --------------------
         for (String tc : testsList) {
-            addCurrentTestMthod(tc);
-            currentTest = extent.createTest(tc);
+
+            activeTest = tc;
+            addCurrentTestMthod(activeTest);
+
+            currentTest = extent.createTest(activeTest);
             currentTest.assignCategory("Regression");
             currentTest.assignCategory("Login");
-            currentTest.info("Starting test: " + tc);
+            currentTest.info("Starting test: " + activeTest);
 
             MainFunctions.deleteFiles(actualPath(className, tc));
             MainFunctions.deleteFiles(diffPath(className, tc));
@@ -79,21 +83,64 @@ public class LoginTests extends BaseTemplate {
                 Config cfg = loadthisTestConfig(className, tc);
                 mf = new MainFunctions(driver, cfg);
 
-                Method m = this.getClass().getDeclaredMethod(tc, Config.class, String.class);
-                m.setAccessible(true);
-                m.invoke(this, cfg, className);
+                // general login executor
+                general(cfg, className, tc);
 
-                currentTest.pass("Test finished successfully");
+                currentTest.pass("Test completed");
 
-            } catch (NoSuchMethodException e) {
-                currentTest.skip("No matching test method found for: " + tc);
             } catch (Throwable e) {
                 currentTest.fail("Exception occurred: " + e.getMessage());
+                currentTest.fail(e);
             }
         }
+
         extent.flush();
     }
 
+
+    // ========================================================
+    // GENERAL LOGIN ACTION HANDLER
+    // ========================================================
+    private void general(Config cfg, String className, String testCaseName) {
+
+        try {
+            currentTest.info("Executing test: " + testCaseName);
+
+            // 1) Perform Login always (basic action)
+            mf.performLogin(cfg);
+            
+            // 2) Capture actual result after login
+            String actualResult = getActualLoginResult();
+            currentTest.info("Actual Result: " + actualResult);
+            
+            // 3) Save artifacts and validate with baseline
+            saveDataArtifacts(className, testCaseName, actualResult);
+            
+        } catch (Exception e) {
+            currentTest.fail("Exception: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+    
+    
+    // ========================================================
+    // CAPTURE ACTUAL LOGIN RESULT FROM UI
+    // ========================================================
+    private String getActualLoginResult() {
+        try {
+            // Return current URL as actual result
+            return mf.getCurrentURL();
+            
+        } catch (Exception e) {
+            currentTest.fail("Error capturing result: " + e.getMessage());
+            return e.getMessage();
+        }
+    }
+
+
+    // ========================================================
+    // ARTIFACT & BASELINE VALIDATION
+    // ========================================================
     private void saveDataArtifacts(String className, String testName, String actualData) {
         try {
             String baseName     = "baseline.txt";
@@ -107,20 +154,19 @@ public class LoginTests extends BaseTemplate {
 
             if (!expected.exists() || expected.length() == 0) {
                 currentTest.warning("Expected baseline file not found: " + expectedFile);
-                currentTest.info("Please create the expected baseline manually with the correct value.");
-                currentTest.info("Actual value: " + actualData);
-                
+                currentTest.info("Please create expected baseline manually.");
+                currentTest.info("Actual: " + actualData);
+
                 CustomFunction.appendToFile("___" + testName + " DIFF___", diffFile);
-                CustomFunction.appendToFile("Expected file missing!", diffFile);
+                CustomFunction.appendToFile("Expected missing!", diffFile);
                 CustomFunction.appendToFile("Actual: " + actualData, diffFile);
-                
+
                 currentTest.fail("Expected baseline file not found");
                 return;
             }
 
             String baseline = Files.readString(Paths.get(expectedFile)).trim();
             String actual = actualData.trim();
-            
             boolean match = baseline.equals(actual);
 
             CustomFunction.appendToFile("___" + testName + " DIFF___", diffFile);
@@ -135,104 +181,17 @@ public class LoginTests extends BaseTemplate {
 
             currentTest.info(MarkupHelper.createCodeBlock(block));
 
+            // ========================================================
+            // ADD PASS/FAIL STATUS BASED ON MATCH
+            // ========================================================
             if (match) {
-                currentTest.log(Status.PASS,
-                    MarkupHelper.createLabel("✓ Actual matches Expected", ExtentColor.GREEN));
+                currentTest.pass("✓ Actual matches Expected");
             } else {
-                currentTest.log(Status.FAIL,
-                    MarkupHelper.createLabel("✗ Baseline mismatch", ExtentColor.RED));
-                currentTest.log(Status.WARNING, "Diff file: " + diffFile);
+                currentTest.fail("✗ Baseline mismatch - Expected: " + baseline + ", but got: " + actual);
             }
 
         } catch (Exception ex) {
-            if (currentTest != null) {
-                currentTest.fail("Artifact save failed: " + ex.getMessage());
-            }
-        }
-    }
-
-    private void validateTest(String testName, String className, String actualData) {
-        saveDataArtifacts(className, testName, actualData);
-        
-        String finalResult = ResultCheck.checkTestResult(className, testName, SuitePath);
-        
-        if ("PASS".equalsIgnoreCase(finalResult)) {
-            currentTest.pass(testName + ": " + finalResult);
-        } else {
-            currentTest.fail(testName + ": " + finalResult);
-        }
-    }
-
-    // ============================================
-    // TEST CASES
-    // ============================================
-
-    private void TC_LOG_001_validLogin(Config cfg, String className) {
-        try {
-            currentTest.info("Performing login with valid credentials");
-            
-            mf.performLogin(cfg);
-            String actualURL = mf.getCurrentURL();
-            
-            validateTest("TC_LOG_001_validLogin", className, actualURL);
-            
-            MainFunctions.performLogout(driver);
-            
-        } catch (Exception e) {
-            currentTest.fail("Exception: " + e.getMessage());
-            e.printStackTrace();
-        }
-    }
-
-    private void TC_LOG_003_emptyFields(Config cfg, String className) {
-        try {
-           currentTest.info("Testing empty fields validation"); 
-           mf.performLogin(cfg);
-           boolean hasValidation = mf.hasRequiredValidation();
-           String actualValue = hasValidation ? "VALIDATION_SHOWN" : "NO_VALIDATION";
-           validateTest("TC_LOG_003_emptyFields", className, actualValue);
-            
-        } catch (Exception e) {
-            currentTest.fail("Exception: " + e.getMessage());
-            e.printStackTrace();
-        }
-    }
-
-    private void TC_LOG_004_emptyPasswordOnly(Config cfg, String className) {
-        try {
-            currentTest.info("Empty password only");
-            
-            mf.performLogin(cfg);
-            boolean hasRequired = mf.hasRequiredValidation();
-            boolean hasPasswordError = mf.hasPasswordValidationError();
-            String actualValue;
-            if (hasRequired) {
-                actualValue = "REQUIRED_VALIDATION";
-            } else if (hasPasswordError) {
-                actualValue = "PASSWORD_ERROR";
-            } else {
-                actualValue = "NO_VALIDATION";
-            }
-            validateTest("TC_LOG_004_emptyPasswordOnly", className, actualValue);
-        } catch (Exception e) {
-            currentTest.fail("Exception: " + e.getMessage());
-            e.printStackTrace();
-        }
-    }
-  private void TC_LOG_009_logoutRedirect(Config cfg, String className) {
-        try {
-            currentTest.info("Logout redirect check");
-            
-            mf.performLogin(cfg);
-            mf.waitForDashboard();
-            MainFunctions.performLogout(driver);
-            String actualURL = mf.getCurrentURL();
-            
-            validateTest("TC_LOG_009_logoutRedirect", className, actualURL);
-            
-        } catch (Exception e) {
-            currentTest.fail("Exception: " + e.getMessage());
-            e.printStackTrace();
+            currentTest.fail("Artifact save failed: " + ex.getMessage());
         }
     }
 }

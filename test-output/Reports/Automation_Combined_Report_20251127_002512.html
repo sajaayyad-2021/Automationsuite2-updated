@@ -35,7 +35,7 @@
 <a href="#"><span class="badge badge-primary">OrangeHRM Regression Suite</span></a>
 </li>
 <li class="m-r-10">
-<a href="#"><span class="badge badge-primary">Nov 26, 2025 05:16:09 AM</span></a>
+<a href="#"><span class="badge badge-primary">Nov 27, 2025 12:25:13 AM</span></a>
 </li>
 </ul>
 </div>
@@ -85,7 +85,7 @@
 <li class="dropdown">
 <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-tag"></i></a>
 <ul id="tag-toggle" class="dropdown-menu dropdown-md p-v-0">
-<a class="dropdown-item" href="#">Login</a><a class="dropdown-item" href="#">Regression</a>
+<a class="dropdown-item" href="#">PIM</a><a class="dropdown-item" href="#">Regression</a>
 </ul>
 </li>
 </ul>
@@ -98,7 +98,7 @@
           <div class="test-detail">
             <p class="name">Module: RegressionSuite</p>
             <p class="text-sm">
-              <span>5:16:12 AM</span> / <span>00:00:55:641</span>
+              <span>12:25:15 AM</span> / <span>00:00:31:824</span>
               <span class="badge fail-bg log float-right">Fail</span>
             </p>
           </div>
@@ -107,9 +107,9 @@
 <div class="p-v-10">
 <div class="info">
 <h5 class="test-status text-fail">Module: RegressionSuite</h5>
-<span class='badge badge-success'>11.26.2025 5:16:12 AM</span>
-<span class='badge badge-danger'>11.26.2025 5:17:08 AM</span>
-<span class='badge badge-default'>00:00:55:641</span>
+<span class='badge badge-success'>11.27.2025 12:25:15 AM</span>
+<span class='badge badge-danger'>11.27.2025 12:25:47 AM</span>
+<span class='badge badge-default'>00:00:31:824</span>
 &middot; <span class='uri-anchor badge badge-default'>#test-id=1</span>
 <span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
 <span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
@@ -122,7 +122,7 @@
           <div class="card-toolbar node-info">
             <ul class="list-inline d-none d-sm-block">
               <li><span class="badge pass-bg log ">Pass</span></li>
-              <li><span class='badge badge-default'>00:55:510</span></li>
+              <li><span class='badge badge-default'>00:00:947</span></li>
               <li></li>
             </ul>
           </div>
@@ -140,7 +140,40 @@
   <tbody>
       <tr class="event-row">
         <td><span class="badge log pass-bg">Pass</span></td>
-        <td>5:17:08 AM</td>
+        <td>12:25:16 AM</td>
+        <td>
+          Test Passed
+        </td>
+      </tr>
+  </tbody>
+</table>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header">
+          <div class="card-toolbar node-info">
+            <ul class="list-inline d-none d-sm-block">
+              <li><span class="badge pass-bg log ">Pass</span></li>
+              <li><span class='badge badge-default'>00:19:846</span></li>
+              <li></li>
+            </ul>
+          </div>
+          <div class="card-title">
+            <a class="node " id="3"><span>PIMSuite</span></a>
+            <div class="node-attr">
+            </div>
+          </div>
+        </div>
+        <div class="collapse">
+          <div class="card-body">
+            
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:25:36 AM</td>
         <td>
           Test Passed
         </td>
@@ -155,12 +188,12 @@
           <div class="card-toolbar node-info">
             <ul class="list-inline d-none d-sm-block">
               <li><span class="badge fail-bg log ">Fail</span></li>
-              <li><span class='badge badge-default'>00:00:035</span></li>
+              <li><span class='badge badge-default'>00:10:937</span></li>
               <li></li>
             </ul>
           </div>
           <div class="card-title">
-            <a class="node " id="7"><span>PIMSuite</span></a>
+            <a class="node " id="6"><span>LeaveSuite</span></a>
             <div class="node-attr">
             </div>
           </div>
@@ -173,29 +206,19 @@
   <tbody>
       <tr class="event-row">
         <td><span class="badge log fail-bg">Fail</span></td>
-        <td>5:17:08 AM</td>
+        <td>12:25:47 AM</td>
         <td>
-          <textarea readonly class="code-block">org.openqa.selenium.NoSuchSessionException: invalid session id
+          <textarea readonly class="code-block">org.openqa.selenium.TimeoutException: Expected condition failed: waiting for visibility of element located by By.name: username (tried for 10 second(s) with 500 milliseconds interval)
 Build info: version: '4.36.0', revision: '6d115cfd87'
 System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '23.0.1'
 Driver info: org.openqa.selenium.chrome.ChromeDriver
-Command: [1c20be81f99b147248b2797179656480, get {url=https://opensource-demo.orangehrmlive.com/web/index.php/auth/login}]
-Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 142.0.7444.176, chrome: {chromedriverVersion: 142.0.7444.175 (302067f14a4..., userDataDir: C:\Users\hp\AppData\Local\T...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:53426}, goog:processID: 14568, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:53426/devtoo..., se:cdpVersion: 142.0.7444.176, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
-Session ID: 1c20be81f99b147248b2797179656480
-	at java.base/jdk.internal.reflect.DirectConstructorHandleAccessor.newInstance(DirectConstructorHandleAccessor.java:62)
-	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:501)
-	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:485)
-	at org.openqa.selenium.remote.ErrorCodec.decode(ErrorCodec.java:167)
-	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:138)
-	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:50)
-	at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:215)
-	at org.openqa.selenium.remote.service.DriverCommandExecutor.invokeExecute(DriverCommandExecutor.java:216)
-	at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:174)
-	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:557)
-	at org.openqa.selenium.remote.RemoteWebDriver.get(RemoteWebDriver.java:325)
-	at utilites.MainFunctions.navigateTo(MainFunctions.java:33)
-	at utilites.MainFunctions.performLogin(MainFunctions.java:41)
-	at Test.PIMTests.PIMSuite(PIMTests.java:71)
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 142.0.7444.176, chrome: {chromedriverVersion: 142.0.7444.175 (302067f14a4..., userDataDir: C:\Users\hp\AppData\Local\T...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:53686}, goog:processID: 25992, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:53686/devtoo..., se:cdpVersion: 142.0.7444.176, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: e0b4101f162b201780d33a794cefa765
+	at org.openqa.selenium.support.ui.WebDriverWait.timeoutException(WebDriverWait.java:84)
+	at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:228)
+	at POM.POMlogin.waitForLoginPage(POMlogin.java:91)
+	at utilites.MainFunctions.performLoginWithoutLogout(MainFunctions.java:69)
+	at Test.LeaveTests.LeaveSuite(LeaveTests.java:71)
 	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
 	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
 	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:139)
@@ -233,103 +256,14 @@ Session ID: 1c20be81f99b147248b2797179656480
 </div>
           </div>
         </li>
-        <li class="test-item"  status="pass" test-id="3"
-          author=""
-          tag="Regression Login"
-          device="">
-          <div class="test-detail">
-            <p class="name">TC_LOG_009_logoutRedirect</p>
-            <p class="text-sm">
-              <span>5:16:12 AM</span> / <span>00:00:07:481</span>
-              <span class="badge pass-bg log float-right">Pass</span>
-            </p>
-          </div>
-          <div class="test-contents d-none">
-<div class="detail-head">
-<div class="p-v-10">
-<div class="info">
-<h5 class="test-status text-pass">TC_LOG_009_logoutRedirect</h5>
-<span class='badge badge-success'>11.26.2025 5:16:12 AM</span>
-<span class='badge badge-danger'>11.26.2025 5:16:20 AM</span>
-<span class='badge badge-default'>00:00:07:481</span>
-&middot; <span class='uri-anchor badge badge-default'>#test-id=3</span>
-<span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
-<span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
-<span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
-</div>
-<div class="m-t-15"><span class="badge badge-pill badge-default">Regression</span>
-<span class="badge badge-pill badge-default">Login</span></div>
-</div>
-</div><div class="detail-body mt-4">
-<table class="table table-sm">
-  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
-  <tbody>
-      <tr class="event-row">
-        <td><span class="badge log info-bg">Info</span></td>
-        <td>5:16:12 AM</td>
-        <td>
-          Starting test: TC_LOG_009_logoutRedirect
-        </td>
-      </tr>
-      <tr class="event-row">
-        <td><span class="badge log info-bg">Info</span></td>
-        <td>5:16:12 AM</td>
-        <td>
-          Logout redirect check
-        </td>
-      </tr>
-      <tr class="event-row">
-        <td><span class="badge log info-bg">Info</span></td>
-        <td>5:16:20 AM</td>
-        <td>
-          <div class='row'>
- <div class='col-md-12'>
-  <textarea readonly class='code-block'>EXPECTED:
-https://opensource-demo.orangehrmlive.com/web/index.php/auth/login
-
-ACTUAL:
-https://opensource-demo.orangehrmlive.com/web/index.php/auth/login
-
-RESULT: PASS</textarea>
- </div>
-</div>
-
-        </td>
-      </tr>
-      <tr class="event-row">
-        <td><span class="badge log pass-bg">Pass</span></td>
-        <td>5:16:20 AM</td>
-        <td>
-          <span class='badge white-text green'>✓ Actual matches Expected</span>
-        </td>
-      </tr>
-      <tr class="event-row">
-        <td><span class="badge log pass-bg">Pass</span></td>
-        <td>5:16:20 AM</td>
-        <td>
-          TC_LOG_009_logoutRedirect: PASS
-        </td>
-      </tr>
-      <tr class="event-row">
-        <td><span class="badge log pass-bg">Pass</span></td>
-        <td>5:16:20 AM</td>
-        <td>
-          Test finished successfully
-        </td>
-      </tr>
-  </tbody>
-</table>
-</div>
-          </div>
-        </li>
         <li class="test-item"  status="pass" test-id="4"
           author=""
-          tag="Regression Login"
+          tag="Regression PIM"
           device="">
           <div class="test-detail">
-            <p class="name">TC_LOG_003_emptyFields</p>
+            <p class="name">TC_PIM_001_addEmployeeValid</p>
             <p class="text-sm">
-              <span>5:16:20 AM</span> / <span>00:00:22:259</span>
+              <span>12:25:19 AM</span> / <span>00:00:08:465</span>
               <span class="badge pass-bg log float-right">Pass</span>
             </p>
           </div>
@@ -337,17 +271,17 @@ RESULT: PASS</textarea>
 <div class="detail-head">
 <div class="p-v-10">
 <div class="info">
-<h5 class="test-status text-pass">TC_LOG_003_emptyFields</h5>
-<span class='badge badge-success'>11.26.2025 5:16:20 AM</span>
-<span class='badge badge-danger'>11.26.2025 5:16:42 AM</span>
-<span class='badge badge-default'>00:00:22:259</span>
+<h5 class="test-status text-pass">TC_PIM_001_addEmployeeValid</h5>
+<span class='badge badge-success'>11.27.2025 12:25:19 AM</span>
+<span class='badge badge-danger'>11.27.2025 12:25:28 AM</span>
+<span class='badge badge-default'>00:00:08:465</span>
 &middot; <span class='uri-anchor badge badge-default'>#test-id=4</span>
 <span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
 <span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
 <span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
 </div>
 <div class="m-t-15"><span class="badge badge-pill badge-default">Regression</span>
-<span class="badge badge-pill badge-default">Login</span></div>
+<span class="badge badge-pill badge-default">PIM</span></div>
 </div>
 </div><div class="detail-body mt-4">
 <table class="table table-sm">
@@ -355,29 +289,43 @@ RESULT: PASS</textarea>
   <tbody>
       <tr class="event-row">
         <td><span class="badge log info-bg">Info</span></td>
-        <td>5:16:20 AM</td>
+        <td>12:25:19 AM</td>
         <td>
-          Starting test: TC_LOG_003_emptyFields
+          Starting test: TC_PIM_001_addEmployeeValid
         </td>
       </tr>
       <tr class="event-row">
         <td><span class="badge log info-bg">Info</span></td>
-        <td>5:16:20 AM</td>
+        <td>12:25:19 AM</td>
         <td>
-          Testing empty fields validation
+          Executing test: TC_PIM_001_addEmployeeValid
         </td>
       </tr>
       <tr class="event-row">
         <td><span class="badge log info-bg">Info</span></td>
-        <td>5:16:42 AM</td>
+        <td>12:25:19 AM</td>
+        <td>
+          Action type: addEmployee
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:25:28 AM</td>
+        <td>
+          Actual Result: https://opensource-demo.orangehrmlive.com/web/index.php/pim/addEmployee
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:25:28 AM</td>
         <td>
           <div class='row'>
  <div class='col-md-12'>
   <textarea readonly class='code-block'>EXPECTED:
-VALIDATION_SHOWN
+https://opensource-demo.orangehrmlive.com/web/index.php/pim/addEmployee
 
 ACTUAL:
-VALIDATION_SHOWN
+https://opensource-demo.orangehrmlive.com/web/index.php/pim/addEmployee
 
 RESULT: PASS</textarea>
  </div>
@@ -387,23 +335,16 @@ RESULT: PASS</textarea>
       </tr>
       <tr class="event-row">
         <td><span class="badge log pass-bg">Pass</span></td>
-        <td>5:16:42 AM</td>
+        <td>12:25:28 AM</td>
         <td>
-          <span class='badge white-text green'>✓ Actual matches Expected</span>
+          ✓ Actual matches Expected
         </td>
       </tr>
       <tr class="event-row">
         <td><span class="badge log pass-bg">Pass</span></td>
-        <td>5:16:42 AM</td>
+        <td>12:25:28 AM</td>
         <td>
-          TC_LOG_003_emptyFields: PASS
-        </td>
-      </tr>
-      <tr class="event-row">
-        <td><span class="badge log pass-bg">Pass</span></td>
-        <td>5:16:42 AM</td>
-        <td>
-          Test finished successfully
+          Test completed
         </td>
       </tr>
   </tbody>
@@ -413,12 +354,12 @@ RESULT: PASS</textarea>
         </li>
         <li class="test-item"  status="pass" test-id="5"
           author=""
-          tag="Regression Login"
+          tag="Regression PIM"
           device="">
           <div class="test-detail">
-            <p class="name">TC_LOG_001_validLogin</p>
+            <p class="name">TC_PIM_002_addEmployeeNoMiddleName</p>
             <p class="text-sm">
-              <span>5:16:42 AM</span> / <span>00:00:08:849</span>
+              <span>12:25:28 AM</span> / <span>00:00:08:241</span>
               <span class="badge pass-bg log float-right">Pass</span>
             </p>
           </div>
@@ -426,17 +367,17 @@ RESULT: PASS</textarea>
 <div class="detail-head">
 <div class="p-v-10">
 <div class="info">
-<h5 class="test-status text-pass">TC_LOG_001_validLogin</h5>
-<span class='badge badge-success'>11.26.2025 5:16:42 AM</span>
-<span class='badge badge-danger'>11.26.2025 5:16:51 AM</span>
-<span class='badge badge-default'>00:00:08:849</span>
+<h5 class="test-status text-pass">TC_PIM_002_addEmployeeNoMiddleName</h5>
+<span class='badge badge-success'>11.27.2025 12:25:28 AM</span>
+<span class='badge badge-danger'>11.27.2025 12:25:36 AM</span>
+<span class='badge badge-default'>00:00:08:241</span>
 &middot; <span class='uri-anchor badge badge-default'>#test-id=5</span>
 <span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
 <span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
 <span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
 </div>
 <div class="m-t-15"><span class="badge badge-pill badge-default">Regression</span>
-<span class="badge badge-pill badge-default">Login</span></div>
+<span class="badge badge-pill badge-default">PIM</span></div>
 </div>
 </div><div class="detail-body mt-4">
 <table class="table table-sm">
@@ -444,29 +385,43 @@ RESULT: PASS</textarea>
   <tbody>
       <tr class="event-row">
         <td><span class="badge log info-bg">Info</span></td>
-        <td>5:16:42 AM</td>
+        <td>12:25:28 AM</td>
         <td>
-          Starting test: TC_LOG_001_validLogin
+          Starting test: TC_PIM_002_addEmployeeNoMiddleName
         </td>
       </tr>
       <tr class="event-row">
         <td><span class="badge log info-bg">Info</span></td>
-        <td>5:16:42 AM</td>
+        <td>12:25:28 AM</td>
         <td>
-          Performing login with valid credentials
+          Executing test: TC_PIM_002_addEmployeeNoMiddleName
         </td>
       </tr>
       <tr class="event-row">
         <td><span class="badge log info-bg">Info</span></td>
-        <td>5:16:47 AM</td>
+        <td>12:25:28 AM</td>
+        <td>
+          Action type: addEmployee
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:25:36 AM</td>
+        <td>
+          Actual Result: https://opensource-demo.orangehrmlive.com/web/index.php/pim/addEmployee
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:25:36 AM</td>
         <td>
           <div class='row'>
  <div class='col-md-12'>
   <textarea readonly class='code-block'>EXPECTED:
-https://opensource-demo.orangehrmlive.com/web/index.php/dashboard/index
+https://opensource-demo.orangehrmlive.com/web/index.php/pim/addEmployee
 
 ACTUAL:
-https://opensource-demo.orangehrmlive.com/web/index.php/dashboard/index
+https://opensource-demo.orangehrmlive.com/web/index.php/pim/addEmployee
 
 RESULT: PASS</textarea>
  </div>
@@ -476,93 +431,16 @@ RESULT: PASS</textarea>
       </tr>
       <tr class="event-row">
         <td><span class="badge log pass-bg">Pass</span></td>
-        <td>5:16:47 AM</td>
+        <td>12:25:36 AM</td>
         <td>
-          <span class='badge white-text green'>✓ Actual matches Expected</span>
+          ✓ Actual matches Expected
         </td>
       </tr>
       <tr class="event-row">
         <td><span class="badge log pass-bg">Pass</span></td>
-        <td>5:16:47 AM</td>
+        <td>12:25:36 AM</td>
         <td>
-          TC_LOG_001_validLogin: PASS
-        </td>
-      </tr>
-      <tr class="event-row">
-        <td><span class="badge log pass-bg">Pass</span></td>
-        <td>5:16:51 AM</td>
-        <td>
-          Test finished successfully
-        </td>
-      </tr>
-  </tbody>
-</table>
-</div>
-          </div>
-        </li>
-        <li class="test-item"  status="fail" test-id="6"
-          author=""
-          tag="Regression Login"
-          device="">
-          <div class="test-detail">
-            <p class="name">TC_LOG_004_emptyPasswordOnly</p>
-            <p class="text-sm">
-              <span>5:16:51 AM</span> / <span>00:00:16:222</span>
-              <span class="badge fail-bg log float-right">Fail</span>
-            </p>
-          </div>
-          <div class="test-contents d-none">
-<div class="detail-head">
-<div class="p-v-10">
-<div class="info">
-<h5 class="test-status text-fail">TC_LOG_004_emptyPasswordOnly</h5>
-<span class='badge badge-success'>11.26.2025 5:16:51 AM</span>
-<span class='badge badge-danger'>11.26.2025 5:17:07 AM</span>
-<span class='badge badge-default'>00:00:16:222</span>
-&middot; <span class='uri-anchor badge badge-default'>#test-id=6</span>
-<span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
-<span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
-<span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
-</div>
-<div class="m-t-15"><span class="badge badge-pill badge-default">Regression</span>
-<span class="badge badge-pill badge-default">Login</span></div>
-</div>
-</div><div class="detail-body mt-4">
-<table class="table table-sm">
-  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
-  <tbody>
-      <tr class="event-row">
-        <td><span class="badge log info-bg">Info</span></td>
-        <td>5:16:51 AM</td>
-        <td>
-          Starting test: TC_LOG_004_emptyPasswordOnly
-        </td>
-      </tr>
-      <tr class="event-row">
-        <td><span class="badge log info-bg">Info</span></td>
-        <td>5:16:51 AM</td>
-        <td>
-          Empty password only
-        </td>
-      </tr>
-      <tr class="event-row">
-        <td><span class="badge log fail-bg">Fail</span></td>
-        <td>5:17:07 AM</td>
-        <td>
-          Exception: invalid session id
-Build info: version: '4.36.0', revision: '6d115cfd87'
-System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '23.0.1'
-Driver info: org.openqa.selenium.chrome.ChromeDriver
-Command: [1c20be81f99b147248b2797179656480, findElement {using=xpath, value=//h6[normalize-space()='Dashboard']}]
-Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 142.0.7444.176, chrome: {chromedriverVersion: 142.0.7444.175 (302067f14a4..., userDataDir: C:\Users\hp\AppData\Local\T...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:53426}, goog:processID: 14568, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:53426/devtoo..., se:cdpVersion: 142.0.7444.176, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
-Session ID: 1c20be81f99b147248b2797179656480
-        </td>
-      </tr>
-      <tr class="event-row">
-        <td><span class="badge log pass-bg">Pass</span></td>
-        <td>5:17:07 AM</td>
-        <td>
-          Test finished successfully
+          Test completed
         </td>
       </tr>
   </tbody>
@@ -592,12 +470,12 @@ Session ID: 1c20be81f99b147248b2797179656480
 <span class="meta">
 <span class='badge log badge-danger'>1</span>
 </span>
-<p class="name">org.openqa.selenium.NoSuchSessionException</p>
+<p class="name">org.openqa.selenium.TimeoutException</p>
 <p class="duration text-sm">1 tests</p>
 </div>
 <div class="test-contents d-none">
 <div class="info">
-<h4>org.openqa.selenium.NoSuchSessionException</h4>
+<h4>org.openqa.selenium.TimeoutException</h4>
 <span status="fail" class='badge log badge-danger'>1 failed</span>
 </div>
 <table class='table table-sm mt-4'>
@@ -611,11 +489,11 @@ Session ID: 1c20be81f99b147248b2797179656480
 <tbody>
 <tr class="tag-test-status" status="fail">
 <td><span class="badge log fail-bg">Fail</span></td>
-<td>05:17:08 AM</td>
+<td>00:25:36 AM</td>
 <td>
-<a href="#" class="linked" test-id='1' id='7'>PIMSuite</a>
+<a href="#" class="linked" test-id='1' id='6'>LeaveSuite</a>
 <div class="">
-<span class="badge badge-default">Module: RegressionSuite.PIMSuite</span>
+<span class="badge badge-default">Module: RegressionSuite.LeaveSuite</span>
 </div>
 </td>
 </tr>
@@ -642,17 +520,15 @@ Session ID: 1c20be81f99b147248b2797179656480
 <li class="test-item">
 <div class="test-detail">
 <span class="meta">
-<span class='badge log pass-bg'>3</span>
-<span class='badge log badge-danger'>1</span>
+<span class='badge log pass-bg'>2</span>
 </span>
-<p class="name">Login</p>
-<p class="duration text-sm">4 tests</p>
+<p class="name">PIM</p>
+<p class="duration text-sm">2 tests</p>
 </div>
 <div class="test-contents d-none">
 <div class="info">
-<h4>Login</h4>
-<span status="pass" class='badge log pass-bg'>3 passed</span>
-<span status="fail" class='badge log badge-danger'>1 failed</span>
+<h4>PIM</h4>
+<span status="pass" class='badge log pass-bg'>2 passed</span>
 </div>
 <table class='table table-sm mt-4'>
 <thead>
@@ -665,30 +541,16 @@ Session ID: 1c20be81f99b147248b2797179656480
 <tbody>
 <tr class="tag-test-status" status="pass">
 <td><span class="badge log pass-bg">Pass</span></td>
-<td>05:16:12 AM</td>
+<td>00:25:19 AM</td>
 <td>
-<a href="#" class="linked" test-id='3' id='3'>TC_LOG_009_logoutRedirect</a>
+<a href="#" class="linked" test-id='4' id='4'>TC_PIM_001_addEmployeeValid</a>
 </td>
 </tr>
 <tr class="tag-test-status" status="pass">
 <td><span class="badge log pass-bg">Pass</span></td>
-<td>05:16:20 AM</td>
+<td>00:25:28 AM</td>
 <td>
-<a href="#" class="linked" test-id='4' id='4'>TC_LOG_003_emptyFields</a>
-</td>
-</tr>
-<tr class="tag-test-status" status="pass">
-<td><span class="badge log pass-bg">Pass</span></td>
-<td>05:16:42 AM</td>
-<td>
-<a href="#" class="linked" test-id='5' id='5'>TC_LOG_001_validLogin</a>
-</td>
-</tr>
-<tr class="tag-test-status" status="fail">
-<td><span class="badge log fail-bg">Fail</span></td>
-<td>05:16:51 AM</td>
-<td>
-<a href="#" class="linked" test-id='6' id='6'>TC_LOG_004_emptyPasswordOnly</a>
+<a href="#" class="linked" test-id='5' id='5'>TC_PIM_002_addEmployeeNoMiddleName</a>
 </td>
 </tr>
 </tbody>
@@ -698,17 +560,15 @@ Session ID: 1c20be81f99b147248b2797179656480
 <li class="test-item">
 <div class="test-detail">
 <span class="meta">
-<span class='badge log pass-bg'>3</span>
-<span class='badge log badge-danger'>1</span>
+<span class='badge log pass-bg'>2</span>
 </span>
 <p class="name">Regression</p>
-<p class="duration text-sm">4 tests</p>
+<p class="duration text-sm">2 tests</p>
 </div>
 <div class="test-contents d-none">
 <div class="info">
 <h4>Regression</h4>
-<span status="pass" class='badge log pass-bg'>3 passed</span>
-<span status="fail" class='badge log badge-danger'>1 failed</span>
+<span status="pass" class='badge log pass-bg'>2 passed</span>
 </div>
 <table class='table table-sm mt-4'>
 <thead>
@@ -721,30 +581,16 @@ Session ID: 1c20be81f99b147248b2797179656480
 <tbody>
 <tr class="tag-test-status" status="pass">
 <td><span class="badge log pass-bg">Pass</span></td>
-<td>05:16:12 AM</td>
+<td>00:25:19 AM</td>
 <td>
-<a href="#" class="linked" test-id='3' id='3'>TC_LOG_009_logoutRedirect</a>
+<a href="#" class="linked" test-id='4' id='4'>TC_PIM_001_addEmployeeValid</a>
 </td>
 </tr>
 <tr class="tag-test-status" status="pass">
 <td><span class="badge log pass-bg">Pass</span></td>
-<td>05:16:20 AM</td>
+<td>00:25:28 AM</td>
 <td>
-<a href="#" class="linked" test-id='4' id='4'>TC_LOG_003_emptyFields</a>
-</td>
-</tr>
-<tr class="tag-test-status" status="pass">
-<td><span class="badge log pass-bg">Pass</span></td>
-<td>05:16:42 AM</td>
-<td>
-<a href="#" class="linked" test-id='5' id='5'>TC_LOG_001_validLogin</a>
-</td>
-</tr>
-<tr class="tag-test-status" status="fail">
-<td><span class="badge log fail-bg">Fail</span></td>
-<td>05:16:51 AM</td>
-<td>
-<a href="#" class="linked" test-id='6' id='6'>TC_LOG_004_emptyPasswordOnly</a>
+<a href="#" class="linked" test-id='5' id='5'>TC_PIM_002_addEmployeeNoMiddleName</a>
 </td>
 </tr>
 </tbody>
@@ -764,25 +610,25 @@ Session ID: 1c20be81f99b147248b2797179656480
 <div class="col-md-3">
 <div class="card"><div class="card-body">
 <p class="m-b-0">Started</p>
-<h3>Nov 26, 2025 05:16:09 AM</h3>
+<h3>Nov 27, 2025 12:25:13 AM</h3>
 </div></div>
 </div>
 <div class="col-md-3">
 <div class="card"><div class="card-body">
 <p class="m-b-0">Ended</p>
-<h3>Nov 26, 2025 05:17:08 AM</h3>
+<h3>Nov 27, 2025 12:25:47 AM</h3>
 </div></div>
 </div>
 <div class="col-md-3">
 <div class="card"><div class="card-body">
 <p class="m-b-0 text-pass">Tests Passed</p>
-<h3>3</h3>
+<h3>2</h3>
 </div></div>
 </div>
 <div class="col-md-3">
 <div class="card"><div class="card-body">
 <p class="m-b-0 text-fail">Tests Failed</p>
-<h3>2</h3>
+<h3>1</h3>
 </div></div>
 </div>
 </div>
@@ -798,12 +644,12 @@ Session ID: 1c20be81f99b147248b2797179656480
 </div>
 </div>
 <div class="card-footer">
-<div><small data-tooltip='60%'>
-<b>3</b> tests passed
+<div><small data-tooltip='66%'>
+<b>2</b> tests passed
 </small>
 </div>
 <div>
-<small data-tooltip='40%'><b>2</b> tests failed,
+<small data-tooltip='33%'><b>1</b> tests failed,
 <b>0</b> skipped, <b data-tooltip='0%'>0</b> others
 </small>
 </div>
@@ -821,9 +667,9 @@ Session ID: 1c20be81f99b147248b2797179656480
 </div>
 </div>
 <div class="card-footer">
-<div><small data-tooltip='50%'><b>1</b> steps passed</small></div>
+<div><small data-tooltip='66%'><b>2</b> steps passed</small></div>
 <div>
-<small data-tooltip='50%'><b>1</b> steps failed,
+<small data-tooltip='33%'><b>1</b> steps failed,
 <b>0</b> skipped, <b data-tooltip='%'>0</b> others
 </small>
 </div>
@@ -841,10 +687,10 @@ Session ID: 1c20be81f99b147248b2797179656480
 </div>
 </div>
 <div class="card-footer">
-<div><small data-tooltip='45%'><b>11</b> events passed</small></div>
+<div><small data-tooltip='35%'><b>6</b> events passed</small></div>
 <div>
-<small data-tooltip='8%'><b>2</b> events failed,
-<b data-tooltip='%'>11</b> others
+<small data-tooltip='5%'><b>1</b> events failed,
+<b data-tooltip='%'>10</b> others
 </small>
 </div>
 </div>
@@ -860,7 +706,7 @@ Session ID: 1c20be81f99b147248b2797179656480
 </div></div>
 <script>
 var timeline = {
-"Module: RegressionSuite":55.641,"TC_LOG_009_logoutRedirect":7.481,"TC_LOG_003_emptyFields":22.259,"TC_LOG_001_validLogin":8.849,"TC_LOG_004_emptyPasswordOnly":16.222
+"Module: RegressionSuite":31.824,"TC_PIM_001_addEmployeeValid":8.465,"TC_PIM_002_addEmployeeNoMiddleName":8.241
 };
 </script>
 <div class="row">
@@ -870,20 +716,20 @@ var timeline = {
 <div class="card-body pb-0 pt-0"><table class="table table-sm table-bordered">
 <thead><tr class="bg-gray"><th>Name</th><th>Passed</th><th>Failed</th><th>Skipped</th><th>Others</th><th>Passed %</th></tr></thead><tbody>
 <tr>
-<td>Login</td>
-<td>3</td>
-<td>1</td>
+<td>PIM</td>
+<td>2</td>
 <td>0</td>
 <td>0</td>
-<td>75%</td>
+<td>0</td>
+<td>100%</td>
 </tr>
 <tr>
 <td>Regression</td>
-<td>3</td>
-<td>1</td>
+<td>2</td>
 <td>0</td>
 <td>0</td>
-<td>75%</td>
+<td>0</td>
+<td>100%</td>
 </tr>
 </tbody>
 </table></div>
@@ -916,12 +762,12 @@ var timeline = {
 <script>
 var statusGroup = {
 parentCount: 5,
-passParent: 3,
-failParent: 2,
+passParent: 2,
+failParent: 1,
 warningParent: 0,
 skipParent: 0,
 childCount: 5,
-passChild: 1,
+passChild: 2,
 failChild: 1,
 warningChild: 0,
 skipChild: 0,
@@ -933,11 +779,11 @@ warningGrandChild: 0,
 skipGrandChild: 0,
 infoGrandChild: 0,
 eventsCount: 5,
-passEvents: 11,
-failEvents: 2,
+passEvents: 6,
+failEvents: 1,
 warningEvents: 0,
 skipEvents: 0,
-infoEvents: 11
+infoEvents: 10
 };
 </script>        </div>
       </div>

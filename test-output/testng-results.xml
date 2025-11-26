@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results ignored="0" total="2" passed="1" failed="1" skipped="0">
+<testng-results ignored="0" total="3" passed="2" failed="1" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2025-11-26T05:16:12 IST" name="AutomationSuite" finished-at="2025-11-26T05:17:08 IST" duration-ms="55660">
+  <suite started-at="2025-11-27T00:25:15 IST" name="AutomationSuite" finished-at="2025-11-27T00:25:47 IST" duration-ms="31844">
     <groups>
     </groups>
-    <test started-at="2025-11-26T05:16:12 IST" name="RegressionSuite" finished-at="2025-11-26T05:17:08 IST" duration-ms="55660">
+    <test started-at="2025-11-27T00:25:15 IST" name="RegressionSuite" finished-at="2025-11-27T00:25:47 IST" duration-ms="31844">
       <class name="Test.LoginTests">
-        <test-method is-config="true" signature="beforeSuiteSetup()[pri:0, instance:Test.LoginTests@53ca01a2]" started-at="2025-11-26T05:16:07 IST" name="beforeSuiteSetup" finished-at="2025-11-26T05:16:12 IST" duration-ms="5099" status="PASS">
+        <test-method is-config="true" signature="beforeSuiteSetup()[pri:0, instance:Test.LoginTests@358c99f5]" started-at="2025-11-27T00:25:10 IST" name="beforeSuiteSetup" finished-at="2025-11-27T00:25:15 IST" duration-ms="4840" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- beforeSuiteSetup -->
-        <test-method is-config="true" signature="getMethodname(java.lang.reflect.Method)[pri:0, instance:Test.LoginTests@53ca01a2]" started-at="2025-11-26T05:16:12 IST" name="getMethodname" finished-at="2025-11-26T05:16:12 IST" duration-ms="12" status="PASS">
+        <test-method is-config="true" signature="getMethodname(java.lang.reflect.Method)[pri:0, instance:Test.LoginTests@358c99f5]" started-at="2025-11-27T00:25:15 IST" name="getMethodname" finished-at="2025-11-27T00:25:15 IST" duration-ms="5" status="PASS">
           <params>
             <param index="0">
               <value>
@@ -22,17 +22,17 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- getMethodname -->
-        <test-method signature="LoginSuite()[pri:0, instance:Test.LoginTests@53ca01a2]" started-at="2025-11-26T05:16:12 IST" name="LoginSuite" finished-at="2025-11-26T05:17:08 IST" duration-ms="55501" status="PASS">
+        <test-method signature="LoginSuite()[pri:0, instance:Test.LoginTests@358c99f5]" started-at="2025-11-27T00:25:15 IST" name="LoginSuite" finished-at="2025-11-27T00:25:16 IST" duration-ms="939" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- LoginSuite -->
-        <test-method is-config="true" signature="afterSuiteCleanup()[pri:0, instance:Test.LoginTests@53ca01a2]" started-at="2025-11-26T05:17:08 IST" name="afterSuiteCleanup" finished-at="2025-11-26T05:17:08 IST" duration-ms="66" status="PASS">
+        <test-method is-config="true" signature="afterSuiteCleanup()[pri:0, instance:Test.LoginTests@358c99f5]" started-at="2025-11-27T00:25:47 IST" name="afterSuiteCleanup" finished-at="2025-11-27T00:25:48 IST" duration-ms="377" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- afterSuiteCleanup -->
       </class> <!-- Test.LoginTests -->
       <class name="Test.PIMTests">
-        <test-method is-config="true" signature="getMethodname(java.lang.reflect.Method)[pri:0, instance:Test.PIMTests@3b2da18f]" started-at="2025-11-26T05:17:08 IST" name="getMethodname" finished-at="2025-11-26T05:17:08 IST" duration-ms="2" status="PASS">
+        <test-method is-config="true" signature="getMethodname(java.lang.reflect.Method)[pri:0, instance:Test.PIMTests@5906ebcb]" started-at="2025-11-27T00:25:16 IST" name="getMethodname" finished-at="2025-11-27T00:25:16 IST" duration-ms="4" status="PASS">
           <params>
             <param index="0">
               <value>
@@ -43,39 +43,45 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- getMethodname -->
-        <test-method signature="PIMSuite()[pri:0, instance:Test.PIMTests@3b2da18f]" started-at="2025-11-26T05:17:08 IST" name="PIMSuite" finished-at="2025-11-26T05:17:08 IST" duration-ms="29" status="FAIL">
-          <exception class="org.openqa.selenium.NoSuchSessionException">
+        <test-method signature="PIMSuite()[pri:0, instance:Test.PIMTests@5906ebcb]" started-at="2025-11-27T00:25:16 IST" name="PIMSuite" finished-at="2025-11-27T00:25:36 IST" duration-ms="19841" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- PIMSuite -->
+      </class> <!-- Test.PIMTests -->
+      <class name="Test.LeaveTests">
+        <test-method is-config="true" signature="getMethodname(java.lang.reflect.Method)[pri:0, instance:Test.LeaveTests@258e2e41]" started-at="2025-11-27T00:25:36 IST" name="getMethodname" finished-at="2025-11-27T00:25:36 IST" duration-ms="2" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void Test.LeaveTests.LeaveSuite() throws java.io.IOException,java.lang.InterruptedException]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getMethodname -->
+        <test-method signature="LeaveSuite()[pri:0, instance:Test.LeaveTests@258e2e41]" started-at="2025-11-27T00:25:36 IST" name="LeaveSuite" finished-at="2025-11-27T00:25:47 IST" duration-ms="10925" status="FAIL">
+          <exception class="org.openqa.selenium.TimeoutException">
             <message>
-              <![CDATA[invalid session id
+              <![CDATA[Expected condition failed: waiting for visibility of element located by By.name: username (tried for 10 second(s) with 500 milliseconds interval)
 Build info: version: '4.36.0', revision: '6d115cfd87'
 System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '23.0.1'
 Driver info: org.openqa.selenium.chrome.ChromeDriver
-Command: [1c20be81f99b147248b2797179656480, get {url=https://opensource-demo.orangehrmlive.com/web/index.php/auth/login}]
-Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 142.0.7444.176, chrome: {chromedriverVersion: 142.0.7444.175 (302067f14a4..., userDataDir: C:\Users\hp\AppData\Local\T...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:53426}, goog:processID: 14568, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:53426/devtoo..., se:cdpVersion: 142.0.7444.176, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
-Session ID: 1c20be81f99b147248b2797179656480]]>
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 142.0.7444.176, chrome: {chromedriverVersion: 142.0.7444.175 (302067f14a4..., userDataDir: C:\Users\hp\AppData\Local\T...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:53686}, goog:processID: 25992, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:53686/devtoo..., se:cdpVersion: 142.0.7444.176, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: e0b4101f162b201780d33a794cefa765]]>
             </message>
             <full-stacktrace>
-              <![CDATA[org.openqa.selenium.NoSuchSessionException: invalid session id
+              <![CDATA[org.openqa.selenium.TimeoutException: Expected condition failed: waiting for visibility of element located by By.name: username (tried for 10 second(s) with 500 milliseconds interval)
 Build info: version: '4.36.0', revision: '6d115cfd87'
 System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '23.0.1'
 Driver info: org.openqa.selenium.chrome.ChromeDriver
-Command: [1c20be81f99b147248b2797179656480, get {url=https://opensource-demo.orangehrmlive.com/web/index.php/auth/login}]
-Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 142.0.7444.176, chrome: {chromedriverVersion: 142.0.7444.175 (302067f14a4..., userDataDir: C:\Users\hp\AppData\Local\T...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:53426}, goog:processID: 14568, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:53426/devtoo..., se:cdpVersion: 142.0.7444.176, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
-Session ID: 1c20be81f99b147248b2797179656480
-at java.base/jdk.internal.reflect.DirectConstructorHandleAccessor.newInstance(DirectConstructorHandleAccessor.java:62)
-at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:501)
-at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:485)
-at org.openqa.selenium.remote.ErrorCodec.decode(ErrorCodec.java:167)
-at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:138)
-at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:50)
-at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:215)
-at org.openqa.selenium.remote.service.DriverCommandExecutor.invokeExecute(DriverCommandExecutor.java:216)
-at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:174)
-at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:557)
-at org.openqa.selenium.remote.RemoteWebDriver.get(RemoteWebDriver.java:325)
-at utilites.MainFunctions.navigateTo(MainFunctions.java:33)
-at utilites.MainFunctions.performLogin(MainFunctions.java:41)
-at Test.PIMTests.PIMSuite(PIMTests.java:71)
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 142.0.7444.176, chrome: {chromedriverVersion: 142.0.7444.175 (302067f14a4..., userDataDir: C:\Users\hp\AppData\Local\T...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:53686}, goog:processID: 25992, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:53686/devtoo..., se:cdpVersion: 142.0.7444.176, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: e0b4101f162b201780d33a794cefa765
+at org.openqa.selenium.support.ui.WebDriverWait.timeoutException(WebDriverWait.java:84)
+at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:228)
+at POM.POMlogin.waitForLoginPage(POMlogin.java:91)
+at utilites.MainFunctions.performLoginWithoutLogout(MainFunctions.java:69)
+at Test.LeaveTests.LeaveSuite(LeaveTests.java:71)
 at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
 at java.base/java.lang.reflect.Method.invoke(Method.java:580)
 at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:139)
@@ -102,11 +108,11 @@ at org.testng.TestNG.run(TestNG.java:1101)
 at Driver.RegressionDriver.main(RegressionDriver.java:32)
 ]]>
             </full-stacktrace>
-          </exception> <!-- org.openqa.selenium.NoSuchSessionException -->
+          </exception> <!-- org.openqa.selenium.TimeoutException -->
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- PIMSuite -->
-      </class> <!-- Test.PIMTests -->
+        </test-method> <!-- LeaveSuite -->
+      </class> <!-- Test.LeaveTests -->
     </test> <!-- RegressionSuite -->
   </suite> <!-- AutomationSuite -->
 </testng-results>

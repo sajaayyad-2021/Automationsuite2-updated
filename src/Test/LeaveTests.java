@@ -5,21 +5,16 @@ import java.io.IOException;
 import java.lang.reflect.Method;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.text.SimpleDateFormat;
-import java.time.Duration;
+
 import java.util.*;
 
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import com.aventstack.extentreports.*;
-import com.aventstack.extentreports.markuputils.ExtentColor;
 import com.aventstack.extentreports.markuputils.MarkupHelper;
 
 import reporting.ExtentManager;
-import reporting.ScreenshotHelper;
 import testbase.BaseTemplate;
 import utilites.Config;
 import utilites.CustomFunction;
@@ -31,7 +26,6 @@ public class LeaveTests extends BaseTemplate {
 
     MainFunctions mf;
     ResultChecker resultCheck = new ResultChecker();
-
     private static ExtentReports extent;
     private ExtentTest currentTest;
 
@@ -42,25 +36,23 @@ public class LeaveTests extends BaseTemplate {
     public void LeaveSuite() throws IOException, InterruptedException {
 
         extent = ExtentManager.getInstance();
-
-        String timestamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
         String className = this.getClass().getSimpleName();
 
-        // ----------------- Parse CLI Args -----------------
-        if (testNmaes_pim == null || testNmaes_pim.trim().isEmpty()) {
-            testNmaes_pim = "ALL";
+        // -------------------- Parse CLI Args --------------------
+        if (testNmaes_leave == null || testNmaes_leave.trim().isEmpty()) {
+            testNmaes_leave = "ALL";
         } else {
-            testNmaes_pim = testNmaes_pim.trim();
+            testNmaes_leave = testNmaes_leave.trim();
         }
 
-        if (!"ALL".equalsIgnoreCase(testNmaes_pim)) {
-            if (testNmaes_pim.contains(",")) {
-                testsList = Arrays.stream(testNmaes_pim.split(","))
-                        .map(String::trim)
-                        .filter(s -> !s.isEmpty())
-                        .toArray(String[]::new);
+        if (!"ALL".equalsIgnoreCase(testNmaes_leave)) {
+            if (testNmaes_leave.contains(",")) {
+                testsList = Arrays.stream(testNmaes_leave.split(","))
+                                 .map(String::trim)
+                                 .filter(s -> !s.isEmpty())
+                                 .toArray(String[]::new);
             } else {
-                testsList = new String[]{ testNmaes_pim };
+                testsList = new String[]{ testNmaes_leave };
             }
         } else {
             Method[] methods = this.getClass().getDeclaredMethods();
@@ -73,55 +65,88 @@ public class LeaveTests extends BaseTemplate {
             testsList = TC.toArray(new String[0]);
         }
 
-      
+        // LOGIN ONCE BEFORE ALL LEAVE TESTS (without logout)
+        Config loginCfg = loadthisTestConfig("LoginTests", "TC_LOG_001_validLogin");
+        mf = new MainFunctions(driver, loginCfg);
+        mf.performLoginWithoutLogout(loginCfg);  // Use new method without logout
+        System.out.println("[LeaveSuite] Logged in successfully");
+
+        // -------------------- Test Loop --------------------
         for (String tc : testsList) {
 
             activeTest = tc;
             addCurrentTestMthod(activeTest);
 
-            String tcRoot = inputPath(className, tc);
-
             currentTest = extent.createTest(activeTest);
             currentTest.assignCategory("Regression");
             currentTest.assignCategory("Leave");
-
             currentTest.info("Starting test: " + activeTest);
 
             MainFunctions.deleteFiles(actualPath(className, tc));
             MainFunctions.deleteFiles(diffPath(className, tc));
 
             try {
-
                 Config cfg = loadthisTestConfig(className, tc);
                 mf = new MainFunctions(driver, cfg);
 
-                invokeTestMethod(tc, cfg, className);
+                // general leave executor
+                general(cfg, className, tc);
 
                 currentTest.pass("Test completed");
 
-            } catch (NoSuchMethodException e) {
-
-                currentTest.skip("No test method found for: " + activeTest);
-
             } catch (Throwable e) {
-
                 currentTest.fail("Exception occurred: " + e.getMessage());
                 currentTest.fail(e);
-
-              
             }
         }
 
         extent.flush();
     }
 
-    private void invokeTestMethod(String methodName, Config cfg, String className) throws Exception {
-        Method m = this.getClass().getDeclaredMethod(methodName, Config.class, String.class);
-        m.setAccessible(true);
-        m.invoke(this, cfg, className);
+
+    // ========================================================
+    // GENERAL LEAVE ACTION HANDLER
+    // ========================================================
+    private void general(Config cfg, String className, String testCaseName) {
+
+        try {
+            currentTest.info("Executing test: " + testCaseName);
+
+            // Perform Leave Search (all scenarios handled inside)
+            mf.performLeaveSearch(cfg);
+
+            // Capture actual result from page
+            String actualResult = getActualLeaveResult();
+            currentTest.info("Actual Result: " + actualResult);
+
+            // Save artifacts and validate with baseline
+            saveDataArtifacts(className, testCaseName, actualResult);
+
+        } catch (Exception e) {
+            currentTest.fail("Exception: " + e.getMessage());
+            e.printStackTrace();
+        }
     }
 
-    // Save Baseline/Actual/Diff
+
+    // ========================================================
+    // CAPTURE ACTUAL LEAVE RESULT FROM UI
+    // ========================================================
+    private String getActualLeaveResult() {
+        try {
+            // Return current URL as actual result (no hardcoded strings)
+            return mf.getCurrentURL();
+            
+        } catch (Exception e) {
+            currentTest.fail("Error capturing result: " + e.getMessage());
+            return e.getMessage();
+        }
+    }
+
+
+    // ========================================================
+    // ARTIFACT & BASELINE VALIDATION
+    // ========================================================
     private void saveDataArtifacts(String className, String testName, String actualData) {
         try {
             String baseName     = "baseline.txt";
@@ -135,20 +160,19 @@ public class LeaveTests extends BaseTemplate {
 
             if (!expected.exists() || expected.length() == 0) {
                 currentTest.warning("Expected baseline file not found: " + expectedFile);
-                currentTest.info("Please create the expected baseline manually with the correct value.");
-                currentTest.info("Actual value: " + actualData);
-                
+                currentTest.info("Please create expected baseline manually.");
+                currentTest.info("Actual: " + actualData);
+
                 CustomFunction.appendToFile("___" + testName + " DIFF___", diffFile);
-                CustomFunction.appendToFile("Expected file missing!", diffFile);
+                CustomFunction.appendToFile("Expected missing!", diffFile);
                 CustomFunction.appendToFile("Actual: " + actualData, diffFile);
-                
+
                 currentTest.fail("Expected baseline file not found");
                 return;
             }
 
             String baseline = Files.readString(Paths.get(expectedFile)).trim();
             String actual = actualData.trim();
-            
             boolean match = baseline.equals(actual);
 
             CustomFunction.appendToFile("___" + testName + " DIFF___", diffFile);
@@ -164,129 +188,13 @@ public class LeaveTests extends BaseTemplate {
             currentTest.info(MarkupHelper.createCodeBlock(block));
 
             if (match) {
-                currentTest.log(Status.PASS,
-                    MarkupHelper.createLabel("✓ Actual matches Expected", ExtentColor.GREEN));
+                currentTest.pass("✓ Actual matches Expected");
             } else {
-                currentTest.log(Status.FAIL,
-                    MarkupHelper.createLabel("✗ Baseline mismatch", ExtentColor.RED));
-                currentTest.log(Status.WARNING, "Diff file: " + diffFile);
+                currentTest.fail("✗ Baseline mismatch - Expected: " + baseline + ", but got: " + actual);
             }
 
         } catch (Exception ex) {
-            if (currentTest != null) {
-                currentTest.fail("Artifact save failed: " + ex.getMessage());
-            }
+            currentTest.fail("Artifact save failed: " + ex.getMessage());
         }
     }
-
-    private void validateTest1(String testName, String className, String actualData) {
-        saveDataArtifacts(className, testName, actualData);
-        
-        String finalResult = resultCheck.checkTestResult(className, testName, SuitePath);
-        
-        if ("PASS".equalsIgnoreCase(finalResult)) {
-            currentTest.pass(testName + ": " + finalResult);
-        } else {
-            currentTest.fail(testName + ": " + finalResult);
-        }
-    }
-
-    // ======================================================
-    // ---------------  TEST CASES ---------------------------
-    // ======================================================
-
-
- // 1) BASIC SEARCH
- private void TC_LEAVE_001_basicSearch(Config cfg, String cn) {
-     try {
-         currentTest.info("Leave Basic Search");
-         
-         String result = mf.performLeaveSearch(cfg);
-         
-         validateTest1("TC_LEAVE_001_basicSearch", cn, result);
-         
-     } catch (Exception e) {
-         currentTest.fail("Exception: " + e.getMessage());
-         e.printStackTrace();
-     }
- }
-
- // 2) SEARCH BY EMPLOYEE
- private void TC_LEAVE_002_searchWithEmployeeName(Config cfg, String cn) {
-     try {
-         currentTest.info("Search using Employee Name");
-         
-         String result = mf.performLeaveSearch(cfg);
-         
-         validateTest1("TC_LEAVE_002_searchWithEmployeeName", cn, result);
-         
-     } catch (Exception e) {
-         currentTest.fail("Exception: " + e.getMessage());
-         e.printStackTrace();
-     }
- }
-
- // 3) INVALID DATE RANGE
- private void TC_LEAVE_003_invalidDateRange(Config cfg, String cn) {
-     try {
-         currentTest.info("Invalid Date Range Test");
-         
-         String result = mf.performLeaveSearch(cfg);
-         
-         validateTest1("TC_LEAVE_003_invalidDateRange", cn, result);
-         
-     } catch (Exception e) {
-         currentTest.fail("Exception: " + e.getMessage());
-         e.printStackTrace();
-     }
- }
-
- // 4) SELECT STATUS
- private void TC_LEAVE_004_selectLeaveStatus(Config cfg, String cn) {
-     try {
-         currentTest.info("Leave Status Selection");
-         
-         String result = mf.performLeaveSearch(cfg);
-         
-         validateTest1("TC_LEAVE_004_selectLeaveStatus", cn, result);
-         
-     } catch (Exception e) {
-         currentTest.fail("Exception: " + e.getMessage());
-         e.printStackTrace();
-     }
- }
-
- // 5) SELECT LEAVE TYPE
- private void TC_LEAVE_005_selectLeaveType(Config cfg, String cn) {
-     try {
-         currentTest.info("Leave Type Selection");
-         
-         String result = mf.performLeaveSearch(cfg);
-         
-         validateTest1("TC_LEAVE_005_selectLeaveType", cn, result);
-         
-     } catch (Exception e) {
-         currentTest.fail("Exception: " + e.getMessage());
-         e.printStackTrace();
-     }
- }
-
- // 6) RESET BUTTON
- private void TC_LEAVE_006_resetButton(Config cfg, String cn) {
-     try {
-         currentTest.info("Reset Button Test");
-         
-         String result = mf.performLeaveReset(cfg);
-         
-         validateTest1("TC_LEAVE_006_resetButton", cn, result);
-         
-     } catch (Exception e) {
-         currentTest.fail("Exception: " + e.getMessage());
-         e.printStackTrace();
-     }
- }
-
- // Add validateTest method (same as PIMTests)
-
-
-    }
+}

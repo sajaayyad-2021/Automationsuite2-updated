@@ -5,11 +5,13 @@
     "passWord": "admin123"
   },
   "leaveSearch": {
-    "fromDate": "",
-    "toDate": "",
-    "employeeName": "",
-    "status": "",
-    "leaveType": "",
-    "subUnit": ""
+
+    "fromDate": "2024-01-01",
+    "toDate": "2024-12-31",
+    "employeeName": "John Doe",
+    "status": "Scheduled",
+    "leaveType": "CAN - Vacation",
+    "subUnit": "Engineering",
+    "resetFiltersLeave": true
   }
 }

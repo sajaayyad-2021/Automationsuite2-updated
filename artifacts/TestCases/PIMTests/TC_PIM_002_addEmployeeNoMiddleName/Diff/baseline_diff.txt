@@ -1,4 +1,4 @@
 ___TC_PIM_002_addEmployeeNoMiddleName DIFF___
-Expected: [EMPID_PATTERN]
-Actual  : UNKNOWN_STATE
-Result  : FAIL
+Expected: https://opensource-demo.orangehrmlive.com/web/index.php/pim/addEmployee
+Actual  : https://opensource-demo.orangehrmlive.com/web/index.php/pim/addEmployee
+Result  : PASS

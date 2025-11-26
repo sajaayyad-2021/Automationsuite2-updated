@@ -1,5 +1,5 @@
 {
-  "baseURL": "https://opensource-demo.orangehrmlive.com/web/index.php",
+"baseURL": "https://opensource-demo.orangehrmlive.com",
   "auth": {
     "userName": "WRONG_USER_123",
     "passWord": "admin123"

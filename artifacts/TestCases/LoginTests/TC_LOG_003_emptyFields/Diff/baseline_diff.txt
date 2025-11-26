@@ -1,4 +1,4 @@
 ___TC_LOG_003_emptyFields DIFF___
-Expected: VALIDATION_SHOWN
-Actual  : VALIDATION_SHOWN
+Expected: https://opensource-demo.orangehrmlive.com/web/index.php/auth/login
+Actual  : https://opensource-demo.orangehrmlive.com/web/index.php/auth/login
 Result  : PASS

@@ -3,14 +3,14 @@
 <suite name="Failed suite [AutomationSuite]">
   <test thread-count="5" name="RegressionSuite(failed)">
     <classes>
-      <class name="Test.PIMTests">
+      <class name="Test.LeaveTests">
         <methods>
           <include name="afterSuiteCleanup"/>
-          <include name="PIMSuite"/>
           <include name="beforeSuiteSetup"/>
           <include name="getMethodname"/>
+          <include name="LeaveSuite"/>
         </methods>
-      </class> <!-- Test.PIMTests -->
+      </class> <!-- Test.LeaveTests -->
     </classes>
   </test> <!-- RegressionSuite(failed) -->
 </suite> <!-- Failed suite [AutomationSuite] -->

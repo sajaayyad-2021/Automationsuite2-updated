@@ -61,6 +61,7 @@ public class Config {
 		private String status;
 		private String leaveType;
 		private String subUnit;
+		private boolean resetFilters;
 
 		public String getFromDate() {
 			return fromDate;
@@ -85,15 +86,19 @@ public class Config {
 		public String getSubUnit() {
 			return subUnit;
 		}
+		 public boolean isResetFilters() {
+		        return resetFilters;
+		    }
 
 		public void setLeaveSearch(String fromDate, String toDate, String employeeName, String status, String leaveType,
-				String subUnit) {
+				String subUnit,boolean resetFilters) {
 			this.fromDate = fromDate;
 			this.toDate = toDate;
 			this.employeeName = employeeName;
 			this.status = status;
 			this.leaveType = leaveType;
 			this.subUnit = subUnit;
+			this.resetFilters = resetFilters;
 		}
 	}
 
@@ -202,8 +207,8 @@ public class Config {
 	}
 
 	public void setLeaveSearch(String fromDate, String toDate, String employeeName, String status, String leaveType,
-			String subUnit) {
-		this.leaveSearch.setLeaveSearch(fromDate, toDate, employeeName, status, leaveType, subUnit);
+	        String subUnit, boolean resetFilters) {  
+	    this.leaveSearch.setLeaveSearch(fromDate, toDate, employeeName, status, leaveType, subUnit, resetFilters);
 	}
 
 	public Recruitment getRecruitment() {
