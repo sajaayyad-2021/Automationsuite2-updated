@@ -466,7 +466,13 @@ java -cp "bin;lib/*" Driver.RegressionDriver -out artifacts -browser chrome -tes
 ## 📊 Test Reports (ExtentReports)
 
 After running the tests, an HTML report is generated here:
+---
 
+##  Sample Execution Log
+
+---
+
+<img width="1363" height="623" alt="image" src="https://github.com/user-attachments/assets/b5a0ed5e-858a-4e83-8c21-7ad576b61228" />
 
 ### Report Includes
 - Test pass/fail status  
@@ -476,11 +482,6 @@ After running the tests, an HTML report is generated here:
 - Test categories (Login, PIM, Leave, Regression)  
 - Summary dashboard with statistics  
 
----
-
-##  Sample Execution Log
-
----
 
 ## Baseline Comparison
 EXPECTED:
@@ -520,8 +521,6 @@ Result : PASS
 **Total Time:** ~16 seconds  
 **Pass Rate:** 100%
 
-
-<img width="1363" height="623" alt="image" src="https://github.com/user-attachments/assets/b5a0ed5e-858a-4e83-8c21-7ad576b61228" />
 
 
 ## 🌟 Key Features
