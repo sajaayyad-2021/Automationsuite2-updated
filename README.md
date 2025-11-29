@@ -24,15 +24,12 @@ This project is:
 - [Overview](#overview)
 - [Framework Architecture](#framework-architecture)
 - [Project Structure](#project-structure)
-- [Prerequisites](#prerequisites)
-- [Setup Instructions](#setup-instructions)
 - [Running Tests](#running-tests)
 - [Test Suites](#test-suites)
 - [Configuration](#configuration)
 - [Test Case Management](#test-case-management)
 - [Reports](#reports)
 - [Key Features](#key-features)
-- [Troubleshooting](#troubleshooting)
 
 ---
 
