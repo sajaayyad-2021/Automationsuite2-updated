@@ -48,7 +48,7 @@ This framework automates functional testing for the **OrangeHRM** system, coveri
 
 | Module | Status | Test Cases | Completion |
 |--------|--------|-----------|-----------|
-| Login Tests | ✅ Functional | 5 cases | ~90% |
+| Login Tests |  Functional | 5 cases | ~90% |
 | PIM Tests |  In Progress | 8 cases | ~70% |
 | Leave Tests | In Progress | 6 cases | ~60% |
 | Recruitment Tests |  Planned | 0 cases | ~10% |
@@ -482,7 +482,7 @@ After running the tests, an HTML report is generated here:
 
 ---
 
-## 🟩 Baseline Comparison
+## Baseline Comparison
 EXPECTED:
 https://opensource-demo.orangehrmlive.com/web/index.php/pim/addEmployee
 
@@ -493,7 +493,7 @@ RESULT: PASS
 
 ---
 
-## 📝 Baseline Files
+##  Baseline Files
 Each test case generates:
 
 | File | Description |
@@ -646,7 +646,7 @@ This is an **open learning project**! Contributions are welcome from:
 
 ---
 
-## ⚠️ Disclaimer
+##  Disclaimer
 
 - This framework uses the **OrangeHRM open-source demo** application
 - Tests may fail if the demo site is down or updated
