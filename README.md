@@ -168,7 +168,7 @@ orangehrm-automation/
 │   │   ├── PIMTests/
 │   │   └── LeaveTests/
 │   └── test-output/
-│       └── ExtentReport.html
+│       └── Reports.html
 │
 └── testng.xml                         # TestNG suite configuration
 ```
