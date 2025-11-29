@@ -495,28 +495,26 @@ java -cp "bin;lib/*" Driver.RegressionDriver -out artifacts -browser chrome -tes
 ```
 
 ---
-📊 Reports
-ExtentReports
-After test execution, view the detailed HTML report:
-artifacts/test-output/ExtentReport.html
-Report includes:
+## 📊 Test Reports (ExtentReports)
 
-✅ Test pass/fail status
-📝 Step-by-step execution logs
-📸 Screenshots (on failure)
-⏱️ Execution timestamps
-📊 Test categories (Regression, Smoke, PIM, Login, Leave)
-📈 Summary dashboard with statistics
+After running the tests, an HTML report is generated here:
 
-Sample Report Output
-Test Execution Log:
-12:25:19 AM | INFO  | Starting test: TC_PIM_001_addEmployeeValid
-12:25:19 AM | INFO  | Executing test: TC_PIM_001_addEmployeeValid
-12:25:19 AM | INFO  | Action type: addEmployee
-12:25:28 AM | INFO  | Actual Result: https://opensource-demo.orangehrmlive.com/web/index.php/pim/addEmployee
-12:25:28 AM | PASS  | ✓ Actual matches Expected
-12:25:28 AM | PASS  | Test completed
-Baseline Comparison:
+
+### Report Includes
+- Test pass/fail status  
+- Step-by-step execution logs  
+- Screenshots on failure  
+- Execution timestamps  
+- Test categories (Login, PIM, Leave, Regression)  
+- Summary dashboard with statistics  
+
+---
+
+##  Sample Execution Log
+
+---
+
+## 🟩 Baseline Comparison
 EXPECTED:
 https://opensource-demo.orangehrmlive.com/web/index.php/pim/addEmployee
 
@@ -524,34 +522,36 @@ ACTUAL:
 https://opensource-demo.orangehrmlive.com/web/index.php/pim/addEmployee
 
 RESULT: PASS
-Report Screenshots
-Example: PIM Test Execution
-StatusTimestampDetails🔵 INFO12:25:19 AMStarting test: TC_PIM_001_addEmployeeValid🔵 INFO12:25:19 AMExecuting test: TC_PIM_001_addEmployeeValid🔵 INFO12:25:19 AMAction type: addEmployee🔵 INFO12:25:28 AMActual Result: https://...pim/addEmployee✅ PASS12:25:28 AM✓ Actual matches Expected✅ PASS12:25:28 AMTest completed
-Execution Time: 00:00:08.465 seconds
 
-Baseline Comparison
-Each test generates three files:
+---
 
-Actual/baseline.txt - Captured result during test execution
-Expected/baseline.txt - Pre-defined expected result (baseline)
-Diff/baseline_diff.txt - Detailed comparison report
+## 📝 Baseline Files
+Each test case generates:
 
-Example Diff Output:
-___TC_LOG_001_validLogin DIFF___
-Expected: https://opensource-demo.orangehrmlive.com/web/index.php/dashboard/index
-Actual : https://opensource-demo.orangehrmlive.com/web/index.php/dashboard/index
+| File | Description |
+|------|-------------|
+| `Actual/baseline.txt` | Actual output |
+| `Expected/baseline.txt` | Expected baseline |
+| `Diff/baseline_diff.txt` | Comparison result |
+
+### Example Diff
+TC_LOG_001_validLogin DIFF
+Expected: /dashboard
+Actual : /dashboard
 Result : PASS
-Example: PIM Add Employee Test
-___TC_PIM_001_addEmployeeValid DIFF___
-Expected: https://opensource-demo.orangehrmlive.com/web/index.php/pim/addEmployee
-Actual : https://opensource-demo.orangehrmlive.com/web/index.php/pim/addEmployee
-Result : PASS
-Test Results Summary
-Sample Run: 2 Test Cases
-Test CaseModuleDurationStatusTC_PIM_001_addEmployeeValidPIM00:00:08.465✅ PASSTC_PIM_002_addEmployeeNoMiddleNamePIM00:00:08.241✅ PASS
-Total Execution Time: ~16 seconds
-Pass Rate: 100%
-Date: Nov 27, 2023 12:25 AM
+
+
+---
+
+## 📈 Test Summary
+| Test Case                          | Module | Duration     | Status |
+|------------------------------------|--------|--------------|--------|
+| TC_PIM_001_addEmployeeValid        | PIM    | 00:00:08.465 | PASS   |
+| TC_PIM_002_addEmployeeNoMiddleName | PIM    | 00:00:08.241 | PASS   |
+
+**Total Time:** ~16 seconds  
+**Pass Rate:** 100%
+
 
 <img width="1363" height="623" alt="image" src="https://github.com/user-attachments/assets/b5a0ed5e-858a-4e83-8c21-7ad576b61228" />
 
