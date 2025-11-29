@@ -67,7 +67,7 @@ This framework automates functional testing for the **OrangeHRM** system, coveri
 
 ---
 
-## 🏗️ Framework Architecture
+## Framework Architecture
 
 ```
 ┌─────────────────────────────────────────┐
@@ -78,7 +78,7 @@ This framework automates functional testing for the **OrangeHRM** system, coveri
                ▼
 ┌─────────────────────────────────────────┐
 │         BaseTemplate.java               │
-│  (TestNG hooks, WebDriver management)   │
+│(TestNG annotations,WebDrivermanagement) │
 └──────────────┬──────────────────────────┘
                │
                ▼
@@ -90,18 +90,19 @@ This framework automates functional testing for the **OrangeHRM** system, coveri
                ▼
 ┌─────────────────────────────────────────┐
 │         MainFunctions.java              │
-│    (Orchestrates test workflows)        │
+│    (Main test functions workflows)      │
 └──────────────┬──────────────────────────┘
                │
                ▼
 ┌─────────────────────────────────────────┐
 │    Controllers (loginCtrl, PIMCtrl...)  │
-│     (Business logic & actions)          │
+│     ( logic & actions)                  │
 └──────────────┬──────────────────────────┘
                │
                ▼
 ┌─────────────────────────────────────────┐
-│      POM (POMlogin, POMPIM...)          │
+│          PAGE OBGECT MODEL 
+ POM (POMlogin, POMPIM...)                │
 │    (Locators & element methods)         │
 └─────────────────────────────────────────┘
 ```
@@ -182,12 +183,7 @@ git clone <repository-url>
 cd orangehrm-automation
 ```
 
-
-
-
-
-
-### 3. Create Test Case Structure
+### 2. Create Test Case Structure
 
 Each test case requires this folder structure:
 
@@ -219,7 +215,6 @@ artifacts/TestCases/LoginTests/TC_LOG_001_validLogin/
   }
 }
 ```
-
 **baseline.txt** example:
 ```
 https://opensource-demo.orangehrmlive.com/web/index.php/dashboard/index
@@ -227,7 +222,7 @@ https://opensource-demo.orangehrmlive.com/web/index.php/dashboard/index
 
 ### 4. Configure RegressionDriver
 
-**Option A: Using IDE (Recommended for Development)**
+**Using IDE **
 
 1. Open `RegressionDriver.java`
 2. Right-click → **Run As** → **Run Configurations**
@@ -236,10 +231,6 @@ https://opensource-demo.orangehrmlive.com/web/index.php/dashboard/index
 -out artifacts -browser chrome -testNmaes_login TC_LOG_001_validLogin,TC_LOG_003_emptyFields,TC_LOG_004_emptyPasswordOnly -url https://opensource-demo.orangehrmlive.com/web/index.php/auth/login
 ```
 4. Click **Apply** → **Run**
-
-**Option B: Using Command Line**
-
-See [Running Tests](#-running-tests) section for command line execution.
 
 ### 6. Verify Setup
 
@@ -339,12 +330,8 @@ java -cp "bin;lib/*" Driver.RegressionDriver -out artifacts -browser chrome -tes
 -out artifacts -browser chrome -testNmaes_login ALL -url https://opensource-demo.orangehrmlive.com/web/index.php/auth/login
 ```
 
-**Example 3: Run specific PIM tests**
-```
--out artifacts -browser chrome -testNmaes_pim TC_PIM_001_addEmployeeValid,TC_PIM_003_addEmployeeMissingFirstName,TC_PIM_006_searchByValidName -url https://opensource-demo.orangehrmlive.com/web/index.php/auth/login
-```
 
-**Example 4: Run ALL PIM tests (8 cases)**
+**Example 3: Run ALL PIM tests (8 cases)**
 ```
 -out artifacts -browser chrome -testNmaes_pim ALL -url https://opensource-demo.orangehrmlive.com/web/index.php/auth/login
 ```
@@ -369,14 +356,7 @@ java -cp "bin;lib/*" Driver.RegressionDriver -out artifacts -browser chrome -tes
 -out artifacts -browser chrome -testNmaes_login TC_LOG_001_validLogin,TC_LOG_008_invalidBoth -testNmaes_pim TC_PIM_001_addEmployeeValid,TC_PIM_002_addEmployeeNoMiddleName -testNmaes_leave TC_LEAVE_001_basicSearch -url https://opensource-demo.orangehrmlive.com/web/index.php/auth/login
 ```
 
-**Example 9: Custom output directory**
-```
--out test-results -browser chrome -testNmaes_login TC_LOG_001_validLogin -url https://opensource-demo.orangehrmlive.com/web/index.php/auth/login
-```
-
----
-
-## 📋 Test Case Management
+##  Test Case Management
 
 ### Login Test Cases
 
@@ -428,7 +408,7 @@ java -cp "bin;lib/*" Driver.RegressionDriver -out artifacts -browser chrome -tes
 
 | Test Suite | Total Cases | Status |
 |-----------|-------------|--------|
-| **Login** | 5 | ✅ Complete |
+| **Login** | 5 |  Complete |
 | **PIM** | 8 |  In Progress |
 | **Leave** | 6 |  In Progress |
 | **Recruitment** | 0 |  Planned |
@@ -443,38 +423,43 @@ java -cp "bin;lib/*" Driver.RegressionDriver -out artifacts -browser chrome -tes
 ```json
 {
   "baseURL": "https://opensource-demo.orangehrmlive.com",
+  
   "auth": {
     "userName": "Admin",
     "passWord": "admin123"
   },
+
   "defaults": {
-    "firstName": "John",
-    "middleName": "M",
-    "lastName": "Doe"
+    "firstName": "Raghad",
+    "middleName": "N",
+    "lastName": "Hamad"
   },
+
   "leaveSearch": {
-    "fromDate": "2024-01-01",
-    "toDate": "2024-12-31",
-    "employeeName": "Peter",
-    "status": "Scheduled",
-    "leaveType": "CAN - Vacation",
-    "subUnit": "Engineering",
-    "resetFilters": false
+    "fromDate": "2024-05-01",
+    "toDate": "2024-12-30",
+    "employeeName": "Linda Anderson",
+    "status": "Taken",
+    "leaveType": "CAN - Personal",
+    "subUnit": "QA",
+    "resetFilters": true
   },
+
   "recruitment": {
-    "candidateFirstName": "Jane",
-    "candidateMiddleName": "A",
-    "candidateLastName": "",
-    "vacancy": " QA Lead",
-    "email": "someone@example.com",
-    "contactNumber": "1234567890",
-    "resumePath": "C:\\resumes\\jane_resume.pdf",
-    "keywords": "selenium, automation",
-    "dateOfApplication": "2024-11-20",
-    "notes": "Strong automation background",
+    "candidateFirstName": "Layan",
+    "candidateMiddleName": "S",
+    "candidateLastName": "Awad",
+    "vacancy": "Software QA Engineer",
+    "email": "layan.qa+" ,
+    "contactNumber": "0591234567",
+    "resumePath": "C:\\resumes\\layan_cv.pdf",
+    "keywords": "quality, testing, automation",
+    "dateOfApplication": "2024-11-27",
+    "notes": "Has strong background in manual + automation testing",
     "consent": true
   }
 }
+
 ```
 
 ---
@@ -560,14 +545,10 @@ Result : PASS
 
 ### 5. **Smart Waits**
 - Explicit waits for dynamic elements
-- Retry mechanism for flaky elements
 
-### 6. **File Upload Support**
-- Handles resume uploads (Recruitment tests)
-- Dynamic file path configuration
-
-### 7. **Auto-Cleanup**
+### 6. **Auto-Cleanup**
 - Deletes Actual/Diff folders before each run
+- delete reports .
 - Fresh results every execution
 
 ---
@@ -597,13 +578,7 @@ mkdir -p artifacts/TestCases/LoginTests/TC_LOG_001_validLogin/Expected
 echo "https://...dashboard..." > artifacts/TestCases/LoginTests/TC_LOG_001_validLogin/Expected/baseline.txt
 ```
 
-### Issue: File upload fails (Recruitment)
 
-**Solution**: Use absolute path in `input.json`
-
-```json
-"resumePath": "C:\\Users\\YourName\\Documents\\resume.pdf"
-```
 
 ### Issue: Tests hang on logout
 
@@ -654,15 +629,6 @@ This is an **open learning project**! Contributions are welcome from:
 - 👨‍💻 QA professionals improving their skills
 - 🌟 Anyone interested in test automation
 
-### How to Contribute
-
-1. Fork the repository
-2. Create feature branch (`git checkout -b feature/new-test`)
-3. Make your changes
-4. Test thoroughly
-5. Commit changes (`git commit -m 'Add: description of changes'`)
-6. Push to branch (`git push origin feature/new-test`)
-7. Open Pull Request with detailed description
 
 ### Areas Needing Improvement
 
