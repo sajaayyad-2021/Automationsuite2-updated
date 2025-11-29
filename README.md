@@ -47,16 +47,16 @@ This framework automates functional testing for the **OrangeHRM** system, coveri
 
 **Validation Approach**: Baseline comparison - each test captures actual results and compares them against expected baseline files.
 
-### 🚧 Current Development Status
+###  Current Development Status
 
 | Module | Status | Test Cases | Completion |
 |--------|--------|-----------|-----------|
 | Login Tests | ✅ Functional | 5 cases | ~90% |
 | PIM Tests |  In Progress | 8 cases | ~70% |
 | Leave Tests | In Progress | 6 cases | ~60% |
-| Recruitment Tests | ⏳ Planned | 0 cases | ~10% |
+| Recruitment Tests |  Planned | 0 cases | ~10% |
 | Reporting |  Functional | - | ~75% |
-| Documentation |  In Progress | - | ~80% |
+
 
 **Test Coverage**: 19 test cases across 3 modules
 
