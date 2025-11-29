@@ -52,11 +52,11 @@ This framework automates functional testing for the **OrangeHRM** system, coveri
 | Module | Status | Test Cases | Completion |
 |--------|--------|-----------|-----------|
 | Login Tests | ✅ Functional | 5 cases | ~90% |
-| PIM Tests | 🚧 In Progress | 8 cases | ~70% |
-| Leave Tests | 🚧 In Progress | 6 cases | ~60% |
+| PIM Tests |  In Progress | 8 cases | ~70% |
+| Leave Tests | In Progress | 6 cases | ~60% |
 | Recruitment Tests | ⏳ Planned | 0 cases | ~10% |
-| Reporting | ✅ Functional | - | ~75% |
-| Documentation | 🚧 In Progress | - | ~80% |
+| Reporting |  Functional | - | ~75% |
+| Documentation |  In Progress | - | ~80% |
 
 **Test Coverage**: 19 test cases across 3 modules
 
@@ -437,7 +437,7 @@ java -cp "bin;lib/*" Driver.RegressionDriver -out artifacts -browser chrome -tes
 | `TC_LEAVE_005_selectLeaveType` | Filter by leave type | Leave type dropdown | Filtered by type |
 | `TC_LEAVE_006_resetButton` | Reset all filters | Click reset button | All filters cleared |
 
-**Status**: 6 test cases implemented 🚧
+**Status**: 6 test cases implemented 
 
 ---
 
@@ -446,9 +446,9 @@ java -cp "bin;lib/*" Driver.RegressionDriver -out artifacts -browser chrome -tes
 | Test Suite | Total Cases | Status |
 |-----------|-------------|--------|
 | **Login** | 5 | ✅ Complete |
-| **PIM** | 8 | 🚧 In Progress |
-| **Leave** | 6 | 🚧 In Progress |
-| **Recruitment** | 0 | ⏳ Planned |
+| **PIM** | 8 |  In Progress |
+| **Leave** | 6 |  In Progress |
+| **Recruitment** | 0 |  Planned |
 | **TOTAL** | **19** | **~65% Complete** |
 
 ---
@@ -482,8 +482,8 @@ java -cp "bin;lib/*" Driver.RegressionDriver -out artifacts -browser chrome -tes
     "candidateFirstName": "Jane",
     "candidateMiddleName": "A",
     "candidateLastName": "Smith",
-    "vacancy": "Senior QA Lead",
-    "email": "jane.smith@example.com",
+    "vacancy": " QA Lead",
+    "email": "someone@example.com",
     "contactNumber": "1234567890",
     "resumePath": "C:\\resumes\\jane_resume.pdf",
     "keywords": "selenium, automation",
