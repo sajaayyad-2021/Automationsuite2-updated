@@ -385,7 +385,7 @@ java -cp "bin;lib/*" Driver.RegressionDriver -out artifacts -browser chrome -tes
 | `TC_PIM_007_searchByInvalidName` | Search with invalid name | Non-existent name | No records found |
 | `TC_PIM_008_searchByInvalidId` | Search with invalid ID | Non-existent ID | No records found |
 
-**Status**: 8 test cases implemented 🚧
+**Status**: 8 test cases implemented 
 
 ---
 
@@ -541,7 +541,7 @@ Result : PASS
 ### 4. **Comprehensive Reporting**
 - ExtentReports with rich UI
 - Embedded logs and screenshots
-- Test categorization (Regression, Smoke)
+- Test categorization (Regression)
 
 ### 5. **Smart Waits**
 - Explicit waits for dynamic elements
