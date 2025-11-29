@@ -495,19 +495,18 @@ java -cp "bin;lib/*" Driver.RegressionDriver -out artifacts -browser chrome -tes
 ```
 
 ---
- Reports
+📊 Reports
 ExtentReports
 After test execution, view the detailed HTML report:
 artifacts/test-output/ExtentReport.html
 Report includes:
 
- Test pass/fail status
- Step-by-step execution logs
-
-
- Execution timestamps
- Test categories (Regression, Smoke, PIM, Login, Leave)
- Summary dashboard with statistics
+✅ Test pass/fail status
+📝 Step-by-step execution logs
+📸 Screenshots (on failure)
+⏱️ Execution timestamps
+📊 Test categories (Regression, Smoke, PIM, Login, Leave)
+📈 Summary dashboard with statistics
 
 Sample Report Output
 Test Execution Log:
@@ -553,6 +552,7 @@ Test CaseModuleDurationStatusTC_PIM_001_addEmployeeValidPIM00:00:08.465✅ PASST
 Total Execution Time: ~16 seconds
 Pass Rate: 100%
 Date: Nov 27, 2023 12:25 AM
+
 <img width="1363" height="623" alt="image" src="https://github.com/user-attachments/assets/b5a0ed5e-858a-4e83-8c21-7ad576b61228" />
 
 
