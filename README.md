@@ -185,26 +185,12 @@ git clone <repository-url>
 cd orangehrm-automation
 ```
 
-### 2. Install Dependencies
-
-**If using Maven**:
-```bash
-mvn clean install
-```
 
 
 
-### 3. IDE Setup (Eclipse/IntelliJ)
 
-**Eclipse**:
-1. Import project: **File** → **Import** → **Existing Projects into Workspace**
-2. Right-click project → **Build Path** → **Add External JARs** → Select all JARs from `lib/`
 
-**IntelliJ IDEA**:
-1. Open project folder
-2. **File** → **Project Structure** → **Libraries** → **+** → **Java** → Select JARs from `lib/`
-
-### 4. Create Test Case Structure
+### 3. Create Test Case Structure
 
 Each test case requires this folder structure:
 
@@ -242,7 +228,7 @@ artifacts/TestCases/LoginTests/TC_LOG_001_validLogin/
 https://opensource-demo.orangehrmlive.com/web/index.php/dashboard/index
 ```
 
-### 5. Configure RegressionDriver
+### 4. Configure RegressionDriver
 
 **Option A: Using IDE (Recommended for Development)**
 
@@ -481,7 +467,7 @@ java -cp "bin;lib/*" Driver.RegressionDriver -out artifacts -browser chrome -tes
   "recruitment": {
     "candidateFirstName": "Jane",
     "candidateMiddleName": "A",
-    "candidateLastName": "Smith",
+    "candidateLastName": "",
     "vacancy": " QA Lead",
     "email": "someone@example.com",
     "contactNumber": "1234567890",
