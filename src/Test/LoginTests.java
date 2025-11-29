@@ -45,7 +45,9 @@ public class LoginTests extends BaseTemplate {
             testNmaes_login = testNmaes_login.trim();
         }
 
+        // we depend ONLY on args 
         if (!"ALL".equalsIgnoreCase(testNmaes_login)) {
+
             if (testNmaes_login.contains(",")) {
                 testsList = Arrays.stream(testNmaes_login.split(","))
                                  .map(String::trim)
@@ -54,21 +56,18 @@ public class LoginTests extends BaseTemplate {
             } else {
                 testsList = new String[]{ testNmaes_login };
             }
+
         } else {
-            Method[] methods = this.getClass().getDeclaredMethods();
-            List<String> TC = new ArrayList<>();
-
-            for (Method m : methods)
-                if (m.getName().startsWith("TC_"))
-                    TC.add(m.getName());
-
-            testsList = TC.toArray(new String[0]);
+            // ALL (not method-based)
+            testsList = null;
         }
 
+      
+    
         // -------------------- Test Loop --------------------
-        for (String tc : testsList) {
+        for (String testcase : testsList) {
 
-            activeTest = tc;
+            activeTest = testcase;
             addCurrentTestMthod(activeTest);
 
             currentTest = extent.createTest(activeTest);
@@ -76,15 +75,15 @@ public class LoginTests extends BaseTemplate {
             currentTest.assignCategory("Login");
             currentTest.info("Starting test: " + activeTest);
 
-            MainFunctions.deleteFiles(actualPath(className, tc));
-            MainFunctions.deleteFiles(diffPath(className, tc));
+            MainFunctions.deleteFiles(actualPath(className, testcase));
+            MainFunctions.deleteFiles(diffPath(className, testcase));
 
             try {
-                Config cfg = loadthisTestConfig(className, tc);
+                Config cfg = loadthisTestConfig(className, testcase);
                 mf = new MainFunctions(driver, cfg);
 
-                // general login executor
-                general(cfg, className, tc);
+              
+                general(cfg, className, testcase);
 
                 currentTest.pass("Test completed");
 
@@ -99,7 +98,7 @@ public class LoginTests extends BaseTemplate {
 
 
     // ========================================================
-    // GENERAL LOGIN ACTION HANDLER
+    // GENERAL LOGIN ACTION 
     // ========================================================
     private void general(Config cfg, String className, String testCaseName) {
 
@@ -123,12 +122,9 @@ public class LoginTests extends BaseTemplate {
     }
     
     
-    // ========================================================
-    // CAPTURE ACTUAL LOGIN RESULT FROM UI
-    // ========================================================
     private String getActualLoginResult() {
         try {
-            // Return current URL as actual result
+            
             return mf.getCurrentURL();
             
         } catch (Exception e) {
@@ -138,9 +134,7 @@ public class LoginTests extends BaseTemplate {
     }
 
 
-    // ========================================================
-    // ARTIFACT & BASELINE VALIDATION
-    // ========================================================
+   
     private void saveDataArtifacts(String className, String testName, String actualData) {
         try {
             String baseName     = "baseline.txt";

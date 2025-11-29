@@ -208,7 +208,8 @@ public class Config {
 
 	public void setLeaveSearch(String fromDate, String toDate, String employeeName, String status, String leaveType,
 	        String subUnit, boolean resetFilters) {  
-	    this.leaveSearch.setLeaveSearch(fromDate, toDate, employeeName, status, leaveType, subUnit, resetFilters);
+	  
+		this.leaveSearch.setLeaveSearch(fromDate, toDate, employeeName, status, leaveType, subUnit, resetFilters);
 	}
 
 	public Recruitment getRecruitment() {

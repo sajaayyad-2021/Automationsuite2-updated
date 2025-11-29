@@ -1,4 +1,0 @@
-___TC_LOG_001_validLogin DIFF___
-Expected: https://opensource-demo.orangehrmlive.com/web/index.php/auth/login
-Actual  : https://opensource-demo.orangehrmlive.com/web/index.php/auth/login
-Result  : PASS

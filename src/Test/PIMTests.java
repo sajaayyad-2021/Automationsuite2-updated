@@ -38,29 +38,32 @@ public class PIMTests extends BaseTemplate {
         String className = this.getClass().getSimpleName();
 
         // -------------------- Parse CLI Args --------------------
-        if (testNmaes_pim == null || testNmaes_pim.trim().isEmpty()) {
-            testNmaes_pim = "ALL";
+        // -------------------- Parse CLI Args --------------------
+        if (  testNmaes_pim == null ||   testNmaes_pim.trim().isEmpty()) {
+              testNmaes_pim = "ALL";
         } else {
-            testNmaes_pim = testNmaes_pim.trim();
+              testNmaes_pim =   testNmaes_pim.trim();
         }
 
-        if (!"ALL".equalsIgnoreCase(testNmaes_pim)) {
-            if (testNmaes_pim.contains(",")) {
-                testsList = Arrays.stream(testNmaes_pim.split(","))
+        // we depend ONLY on args 
+        if (!"ALL".equalsIgnoreCase(  testNmaes_pim)) {
+
+            if (  testNmaes_pim.contains(",")) {
+                testsList = Arrays.stream(  testNmaes_pim.split(","))
                                  .map(String::trim)
                                  .filter(s -> !s.isEmpty())
                                  .toArray(String[]::new);
             } else {
-                testsList = new String[]{ testNmaes_pim };
+                testsList = new String[]{   testNmaes_pim };
             }
+
         } else {
-            Method[] methods = this.getClass().getDeclaredMethods();
-            List<String> TC = new ArrayList<>();
-            for (Method m : methods)
-                if (m.getName().startsWith("TC_PIM_"))
-                    TC.add(m.getName());
-            testsList = TC.toArray(new String[0]);
+            // ALL (not method-based)
+            testsList = null;
         }
+
+        
+     
 
         // LOGIN ONCE BEFORE ALL PIM TESTS (without logout)
         Config loginCfg = loadthisTestConfig("LoginTests", "TC_LOG_001_validLogin");

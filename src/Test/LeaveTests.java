@@ -54,15 +54,9 @@ public class LeaveTests extends BaseTemplate {
             } else {
                 testsList = new String[]{ testNmaes_leave };
             }
-        } else {
-            Method[] methods = this.getClass().getDeclaredMethods();
-            List<String> TC = new ArrayList<>();
-
-            for (Method m : methods)
-                if (m.getName().startsWith("TC_"))
-                    TC.add(m.getName());
-
-            testsList = TC.toArray(new String[0]);
+        } else   {
+            // ALL (not method-based)
+            testsList = null;
         }
 
         // LOGIN ONCE BEFORE ALL LEAVE TESTS (without logout)
@@ -105,17 +99,17 @@ public class LeaveTests extends BaseTemplate {
 
 
     // ========================================================
-    // GENERAL LEAVE ACTION HANDLER
+    // GENERAL LEAVE ACTION 
     // ========================================================
     private void general(Config cfg, String className, String testCaseName) {
 
         try {
             currentTest.info("Executing test: " + testCaseName);
 
-            // Perform Leave Search (all scenarios handled inside)
+          
             mf.performLeaveSearch(cfg);
 
-            // Capture actual result from page
+        
             String actualResult = getActualLeaveResult();
             currentTest.info("Actual Result: " + actualResult);
 
