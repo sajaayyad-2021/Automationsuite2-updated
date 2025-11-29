@@ -616,7 +616,7 @@ echo "https://...dashboard..." > artifacts/TestCases/LoginTests/TC_LOG_001_valid
 ### Step 1: Create Test Case Folder
 
 ```bash
-mkdir -p artifacts/TestCases/LoginTests/TC_LOG_NEW_TEST/{Input,Expected}
+artifacts/TestCases/LoginTests/TC_LOG_NEW_TEST/{Input,Expected}
 ```
 
 ### Step 2: Create input.json
