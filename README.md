@@ -48,7 +48,7 @@ This framework automates functional testing for the **OrangeHRM** system, coveri
 
 | Module | Status | Test Cases | Completion |
 |--------|--------|-----------|-----------|
-| Login Tests | ✅ Functional | 5 cases | ~90% |
+| Login Tests |  Functional | 5 cases | ~90% |
 | PIM Tests |  In Progress | 8 cases | ~70% |
 | Leave Tests | In Progress | 6 cases | ~60% |
 | Recruitment Tests |  Planned | 0 cases | ~10% |
@@ -385,7 +385,7 @@ java -cp "bin;lib/*" Driver.RegressionDriver -out artifacts -browser chrome -tes
 | `TC_PIM_007_searchByInvalidName` | Search with invalid name | Non-existent name | No records found |
 | `TC_PIM_008_searchByInvalidId` | Search with invalid ID | Non-existent ID | No records found |
 
-**Status**: 8 test cases implemented 🚧
+**Status**: 8 test cases implemented 
 
 ---
 
@@ -466,7 +466,13 @@ java -cp "bin;lib/*" Driver.RegressionDriver -out artifacts -browser chrome -tes
 ## 📊 Test Reports (ExtentReports)
 
 After running the tests, an HTML report is generated here:
+---
 
+##  Sample Execution Log
+
+---
+
+<img width="1363" height="623" alt="image" src="https://github.com/user-attachments/assets/b5a0ed5e-858a-4e83-8c21-7ad576b61228" />
 
 ### Report Includes
 - Test pass/fail status  
@@ -476,13 +482,8 @@ After running the tests, an HTML report is generated here:
 - Test categories (Login, PIM, Leave, Regression)  
 - Summary dashboard with statistics  
 
----
 
-##  Sample Execution Log
-
----
-
-## 🟩 Baseline Comparison
+## Baseline Comparison
 EXPECTED:
 https://opensource-demo.orangehrmlive.com/web/index.php/pim/addEmployee
 
@@ -493,7 +494,7 @@ RESULT: PASS
 
 ---
 
-## 📝 Baseline Files
+##  Baseline Files
 Each test case generates:
 
 | File | Description |
@@ -521,8 +522,6 @@ Result : PASS
 **Pass Rate:** 100%
 
 
-<img width="1363" height="623" alt="image" src="https://github.com/user-attachments/assets/b5a0ed5e-858a-4e83-8c21-7ad576b61228" />
-
 
 ## 🌟 Key Features
 
@@ -541,7 +540,7 @@ Result : PASS
 ### 4. **Comprehensive Reporting**
 - ExtentReports with rich UI
 - Embedded logs and screenshots
-- Test categorization (Regression, Smoke)
+- Test categorization (Regression)
 
 ### 5. **Smart Waits**
 - Explicit waits for dynamic elements
@@ -629,30 +628,14 @@ This is an **open learning project**! Contributions are welcome from:
 - 👨‍💻 QA professionals improving their skills
 - 🌟 Anyone interested in test automation
 
-
-### Areas Needing Improvement
-
-- [ ] Add more negative test scenarios
-- [ ] Improve error handling and recovery
-- [ ] Add data-driven testing examples
-- [ ] Enhance reporting with screenshots
-- [ ] Add API testing integration
-- [ ] Implement parallel execution
-- [ ] Add CI/CD pipeline examples (Jenkins/GitHub Actions)
-- [ ] Improve documentation with video tutorials
-- [ ] Add more comprehensive test coverage
-
-**Note**: This is a learning project - all skill levels welcome! 🚀
-
 ---
 
-## ⚠️ Disclaimer
+##  NOTES
 
 - This framework uses the **OrangeHRM open-source demo** application
 - Tests may fail if the demo site is down or updated
 - This is **NOT** intended for production use
-- No warranty or support is provided
-- Use at your own risk for learning purposes
+
 
 ---
 
