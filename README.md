@@ -631,13 +631,12 @@ This is an **open learning project**! Contributions are welcome from:
 
 ---
 
-##  Disclaimer
+##  NOTES
 
 - This framework uses the **OrangeHRM open-source demo** application
 - Tests may fail if the demo site is down or updated
 - This is **NOT** intended for production use
-- No warranty or support is provided
-- Use at your own risk for learning purposes
+
 
 ---
 
